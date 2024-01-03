@@ -1,4 +1,4 @@
-import fs from 'fs';
+import Database from '../database/database.js';
 import pdf_table_extractor from 'pdf-table-extractor';
 
 class Extractor {
@@ -7,13 +7,8 @@ class Extractor {
   }
 
   static success(result) {
-    const rates = Extractor.genarateRates(result);
-    fs.writeFile(
-      'utils/extractor/rates.json',
-      JSON.stringify(rates),
-      { encoding: 'utf-8' },
-      () => console.log('done')
-    );
+    const ratesdata = Extractor.genarateRates(result);
+    Database.create.rates(ratesdata);
   }
 
   static error() {
