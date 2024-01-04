@@ -1,3 +1,4 @@
+import { Input } from '@/components/ui/input';
 import { currency } from '../../../types';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
@@ -17,45 +18,54 @@ type Props = {
 
 const ConverterModule = (props: Props) => {
   const { currency, amount, rates } = props;
-  const [recentlyUsedCurrencies, setrecentlyUsedCurrencies] = useState<currency[]>([]);
+  const [recentlyUsedCurrencies, setrecentlyUsedCurrencies] = useState<currency[]>([
+    rates[1],
+    rates[2],
+    rates[3],
+  ]);
 
   const findCurrency = (name: string) =>
     rates.filter((currency) => currency.currency === name)[0];
 
-  const handleCurrencyChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const currencyIsFound = findCurrency(event.target.value);
+  const handleCurrencyChange = (
+    event: ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    const currencyIsFound = findCurrency(event.currentTarget.value);
 
     if (currencyIsFound) {
       currency.setCurrency(currencyIsFound);
-      setrecentlyUsedCurrencies((prev) => prev);
+      setrecentlyUsedCurrencies((prev) => [currencyIsFound, prev[0], prev[1]]);
     }
   };
 
   return (
-    <div className="flex flex-col gap-3 text-black">
+    <div className="flex flex-col gap-3 pt-6">
       <select
         id="selected-currenct"
         onChange={handleCurrencyChange}
-        className="px-3 py-2 outline-none rounded-lg text-black"
+        className="px-3 py-2 outline-none rounded-lg bg-background border-input border"
       >
         {rates.map((rate) => (
-          <option value={rate.currency} className="text-black" key={rate.currency}>
+          <option value={rate.currency} className="bg-background" key={rate.currency}>
             {rate.currency}
           </option>
         ))}
       </select>
 
-      <input
-        id="amount"
-        type="number"
-        value={amount.value}
-        onChange={amount.setAmount}
-        className="p-3 outline-none rounded-lg"
-      />
+      <Input id="amount" type="number" value={amount.value} onChange={amount.setAmount} />
 
       <div className="flex gap-2" id="recently-selected">
         {recentlyUsedCurrencies.map((currency) => {
-          return <div key={currency.currency}>{currency.currency}</div>;
+          return (
+            <Input
+              id="amount"
+              type="button"
+              key={currency.currency}
+              value={currency.currency}
+              onClick={handleCurrencyChange}
+              className="bg-white text-black"
+            />
+          );
         })}
       </div>
     </div>

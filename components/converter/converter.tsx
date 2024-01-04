@@ -29,18 +29,18 @@ const CurrencyConverter: FC<Props> = (props) => {
   }, [primaryAmout, secondaryCurrency.currency]);
 
   return (
-    <section>
-      <h1>Currency converter</h1>
-      <div className="flex gap-5">
+    <section className="flex flex-col gap-5 w-6/12 p-4">
+      <div className="flex flex-col justify-between">
         <div className="flex flex-col">
-          <label htmlFor="currency">Enter amout:</label>
+          <label htmlFor="currency">Enter amout ZWL:</label>
           <input
+            min={0}
             type="number"
             id="currency"
-            value={primaryAmout}
-            className="p-3 outline-none rounded-lg text-black"
+            value={parseInt(primaryAmout).toFixed(2)}
+            className="p-3 rounded-lg bg-background border-input border"
             onChange={(event) => {
-              setPriamaryAmount(event.target.value);
+              setPriamaryAmount(parseInt(event.target.value).toFixed(2));
             }}
           />
         </div>
