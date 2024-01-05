@@ -9,9 +9,9 @@ type Props = {
 };
 
 const CurrencyConverter: FC<Props> = (props) => {
-  const [priamaryCurrency, setPriamaryCurrency] = useState<currency>(props.rates[1]);
-
-  const [secondaryCurrency, setSecondaryCurrency] = useState<currency>(props.rates[1]);
+  const [secondaryCurrency, setSecondaryCurrency] = useState<currency>(
+    props.rates.filter((currency) => currency.currency === 'USD')[0]
+  );
 
   const [primaryAmout, setPriamaryAmount] = useState<string>('1');
   const [secondaryAmount, setSecondaryAmount] = useState<string>(
@@ -19,7 +19,7 @@ const CurrencyConverter: FC<Props> = (props) => {
   );
 
   const handleConversion = useCallback(
-    () => (parseFloat(primaryAmout) * secondaryCurrency.mid_zwl).toFixed(2).toString(),
+    () => (parseFloat(primaryAmout) * secondaryCurrency.mid_zwl).toFixed(2),
     [primaryAmout, secondaryCurrency.mid_zwl]
   );
 
@@ -33,21 +33,24 @@ const CurrencyConverter: FC<Props> = (props) => {
       <div className="flex flex-col justify-between">
         <div className="flex flex-col">
           <label htmlFor="currency">Enter amout ZWL:</label>
-          <input
-            min={0}
-            type="number"
-            id="currency"
-            value={parseInt(primaryAmout).toFixed(2)}
-            className="p-3 rounded-lg bg-background border-input border"
-            onChange={(event) => {
-              setPriamaryAmount(parseInt(event.target.value).toFixed(2));
-            }}
-          />
+          <span className="w-full border-input border rounded-lg py-3 px-2">
+            <span className="bg-border p-2 rounded-lg text-sm mr-3">ZWL</span>
+            <input
+              min={'0'}
+              type="number"
+              id="currency"
+              value={primaryAmout}
+              className="bg-background outline-none"
+              onChange={(event) => {
+                setPriamaryAmount(parseFloat(event.target.value).toString());
+              }}
+            />
+          </span>
         </div>
 
         <ConverterModule
           currency={{
-            value: priamaryCurrency.currency,
+            value: secondaryCurrency.currency,
             setCurrency: setSecondaryCurrency,
           }}
           amount={{

@@ -43,16 +43,31 @@ const ConverterModule = (props: Props) => {
       <select
         id="selected-currenct"
         onChange={handleCurrencyChange}
+        defaultValue={currency.value}
         className="px-3 py-2 outline-none rounded-lg bg-background border-input border"
       >
         {rates.map((rate) => (
-          <option value={rate.currency} className="bg-background" key={rate.currency}>
+          <option
+            value={rate.currency}
+            className="bg-background"
+            key={rate.currency + rate.ask_zwl}
+          >
             {rate.currency}
           </option>
         ))}
       </select>
 
-      <Input id="amount" type="number" value={amount.value} onChange={amount.setAmount} />
+      <span className="w-full border-input border rounded-lg py-3 px-2">
+        <span className="bg-border p-2 rounded-lg text-sm mr-3">{currency.value}</span>
+        <input
+          min={0}
+          id="amount"
+          type="number"
+          value={amount.value}
+          className="  bg-background outline-none"
+          onChange={amount.setAmount}
+        />
+      </span>
 
       <div className="flex gap-2" id="recently-selected">
         {recentlyUsedCurrencies.map((currency) => {
