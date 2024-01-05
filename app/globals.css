@@ -36,7 +36,7 @@
   }
 
   .dark {
-    --background: 240, 10%, 4%;
+    --background: 0, 0%, 4%;
     --foreground: 0, 0%, 100%;
 
     --card: 222.2 84% 4.9%;
@@ -75,6 +75,14 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   width: 100%;
   display: flex;
@@ -84,4 +92,12 @@ body {
 main {
   width: 80%;
   margin: auto 0;
+}
+
+input[type='number']::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
 }

@@ -9,14 +9,14 @@ export const metadata: Metadata = {
 };
 
 const poppins = Manrope({
-  weight: '400',
+  weight: '500',
   subsets: ['latin'],
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.className + ' dark'}>
-      <body>{children}</body>
+      <body className="bg-neutral-950">{children}</body>
     </html>
   );
 }

@@ -28,7 +28,7 @@ export default async function Home() {
   const rates = await getRates();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-evenly px-24 gap-5">
+    <main className="flex min-h-screen flex-col items-center justify-evenly px-24 gap-8 pb-5">
       <nav className="flex justify-between w-full py-10">
         <h1 className="font-bold">Zimbabwe bank rates</h1>
 
