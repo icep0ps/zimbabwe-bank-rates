@@ -2,6 +2,7 @@ import { currency } from '@/types';
 import Rate from '@/components/rate';
 import Rates from '@/components/rates';
 import Link from 'next/link';
+import Information from '@/components/information/information';
 
 const getOfficalRate = async () => {
   const data = await fetch('http://localhost:3000/api/rates/offical', {
@@ -37,7 +38,7 @@ export default async function Home() {
             <Link href={'#exchange_rates'}>Exchange rates</Link>
           </li>
           <li className="underline">
-            <Link href={'#'}>API</Link>
+            <Link href={'#how_it_works'}>How it works</Link>
           </li>
           <li className="underline">
             <Link href={'https://github.com/icep0ps/zimbabwe-bank-rates'}>Github</Link>
@@ -45,6 +46,7 @@ export default async function Home() {
         </ul>
       </nav>
       <Rate rate={rate} rates={rates} />
+      <Information />
       <Rates rates={rates} />
     </main>
   );
