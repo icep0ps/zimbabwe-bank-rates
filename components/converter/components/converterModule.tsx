@@ -39,7 +39,7 @@ const ConverterModule = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 pt-6">
+    <div className="flex flex-col gap-3">
       <select
         id="selected-currenct"
         onChange={handleCurrencyChange}

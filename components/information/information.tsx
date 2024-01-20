@@ -5,8 +5,8 @@ import { CircleDollarSign, Hourglass, MessageCircleQuestion } from 'lucide-react
 type Props = {};
 const Information: FC<Props> = (props) => {
   return (
-    <div className=" w-full" id="how_it_works">
-      <h1 className="w-full text-center text-3xl capitalize py-16">
+    <div className="w-full flex flex-col gap-10" id="how_it_works">
+      <h1 className="w-full text-center text-3xl capitalize">
         frequently asked questions
       </h1>
       <div className="flex flex-wrap justify-between w-full">

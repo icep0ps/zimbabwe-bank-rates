@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import './globals.css';
+import Navigation from '@/components/navigation/navigation';
+import Footer from '@/components/footer/footer';
 
 export const metadata: Metadata = {
   title: 'Zimbabwe Bank Rate',
@@ -16,7 +18,13 @@ const poppins = Manrope({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.className + ' dark'}>
-      <body className="bg-neutral-950">{children}</body>
+      <body className="bg-neutral-950">
+        <main className="flex min-h-screen flex-col items-center justify-start px-24 gap-10 pb-5">
+          <Navigation />
+          {children}
+          <Footer />
+        </main>
+      </body>
     </html>
   );
 }
