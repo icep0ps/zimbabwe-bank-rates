@@ -1,16 +1,20 @@
 import 'dotenv/config';
-import mysql from 'mysql2';
+
+import pkg from 'pg';
+const { Client } = pkg;
+
+const client = new Client({
+  host: process.env.HOST,
+  user: process.env.USER,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
+  port: process.env.PORT,
+});
 
 class Database {
-  static connect() {
-    const connection = mysql.createConnection({
-      host: process.env.HOST,
-      user: process.env.USER,
-      database: process.env.DATABASE,
-      password: process.env.PASSWORD,
-    });
-
-    return connection;
+  static async connect() {
+    const con = await client.connect();
+    return con;
   }
 
   static async query(query, params) {
@@ -22,6 +26,7 @@ class Database {
         } else {
           res(results);
         }
+        connection.end();
       });
     });
   }
@@ -29,13 +34,13 @@ class Database {
   static get = {
     async rates() {
       return await Database.query(
-        'SELECT * FROM `rates` WHERE `date_published` = CURRENT_DATE();'
+        'SELECT * FROM `rates` WHERE `date_published` =  "2024-01-03";'
       );
     },
 
     async offical(currency) {
       return await Database.query(
-        'SELECT * FROM `rates` WHERE `date_published` = CURRENT_DATE() AND `currency` = ?;',
+        'SELECT * FROM `rates` WHERE `date_published` = "2024-01-03" AND `currency` = ? ;',
         [currency]
       );
     },
@@ -59,6 +64,7 @@ class Database {
             }
           }
         );
+        connection.end();
       }
     },
   };
