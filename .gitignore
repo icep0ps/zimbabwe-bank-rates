@@ -39,3 +39,5 @@ next-env.d.ts
 .vscode
 
 **.env
+utils/extractor/rates.pdf
+tests/utils/mocks/rates.pdf

@@ -58,4 +58,3 @@ class Getpdf {
 }
 
 export default Getpdf;
-Getpdf.run();
