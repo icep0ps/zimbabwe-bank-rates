@@ -41,3 +41,4 @@ next-env.d.ts
 **.env
 utils/extractor/rates.pdf
 tests/utils/mocks/rates.pdf
+utils/main.js
