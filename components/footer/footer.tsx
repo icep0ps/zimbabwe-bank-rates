@@ -5,9 +5,9 @@ type Props = {};
 const Footer = (props: Props) => {
   return (
     <footer className="flex justify-between w-full">
-      <div>
+      <div className="flex flex-col justify-between">
         <h1>Zimbabwe bank rates</h1>
-        <p>© 2024 Zimbabwe Bank Rates. All rights reserved.</p>
+        <p className="text-xs">© 2024 Zimbabwe Bank Rates. All rights reserved.</p>
       </div>
 
       <div className="flex gap-5">
