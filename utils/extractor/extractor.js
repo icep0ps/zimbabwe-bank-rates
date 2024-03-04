@@ -31,7 +31,7 @@ class Extractor {
   }
 
   static genarateRates() {
-    const rates = [];
+    const rates = {};
     let groupedRates = [];
     const currency = new RegExp(/^[A-Z]{3}(%2F[A-Z]+)?$/);
     const whitespace = new RegExp(/%20/);
@@ -57,7 +57,7 @@ class Extractor {
 
     for (let currency = 0; currency < currencies.length; currency++) {
       const rate = groupedRates[currency];
-      rates.push({
+      Object.assign(rates, {
         [currencies[currency]]: {
           bid: rate[0],
           ask: rate[1],
