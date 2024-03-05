@@ -21,9 +21,9 @@ class Extractor {
     pdfParser.loadPDF('./utils/extractor/rates.pdf');
   }
 
-  static success() {
+  static async success() {
     const ratesdata = Extractor.genarateRates();
-    Database.create.rates(ratesdata);
+    await Database.create.rates(ratesdata);
   }
 
   static error() {
