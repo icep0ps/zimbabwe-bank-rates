@@ -12,7 +12,7 @@ type Props = {
 
 const CurrencyConverter: FC<Props> = (props) => {
   const [secondaryCurrency, setSecondaryCurrency] = useState<currency>(
-    props.rates.filter((currency) => currency.currency === 'USD')[0]
+    props.rates.filter((currency) => currency.currency.trim() === 'USD')[0]
   );
 
   const [primaryAmout, setPriamaryAmount] = useState<string>(
