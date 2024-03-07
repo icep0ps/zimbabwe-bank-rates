@@ -46,6 +46,7 @@ class Database {
 
   static create = {
     async rates(rates) {
+      console.log('Creaing rates in database');
       const connection = await Database.connect();
 
       for (const [currency, rate_values] of Object.entries(rates)) {

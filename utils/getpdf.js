@@ -13,8 +13,10 @@ class Getpdf {
   static async navigate() {
     const browser = await puppeteer.launch({
       headless: false,
+      ignoreHTTPSErrors: true,
       args: ['--disable-features=site-per-process'],
     });
+    console.log('navigating to rbz');
     const page = await browser.newPage();
 
     await page.goto('https://www.rbz.co.zw/index.php/research/markets/exchange-rates', {
@@ -28,9 +30,11 @@ class Getpdf {
       hrefElement
     );
 
+    console.log('navigating to rates');
     await page.goto('https://www.rbz.co.zw' + html, { waitUntil: 'domcontentloaded' });
 
     const links = [];
+    console.log('fetching rates');
     const linksHandlers = await page.$$('.item-page > table > tbody >>>> a');
 
     for (const linksHandler of linksHandlers) {
@@ -45,6 +49,7 @@ class Getpdf {
   }
 
   static downloadpdf(url) {
+    console.log('downloading pdfs');
     const file = fs.createWriteStream('utils/extractor/rates.pdf');
     https.get(url, function (response) {
       response.pipe(file);

@@ -1,17 +1,18 @@
 import fs from 'fs';
-import data from './rates.json' assert { type: 'json' };
 import PDFParser from 'pdf2json';
 import Database from '../database/database.js';
+import data from './rates.json' assert { type: 'json' };
 
 class Extractor {
   static read() {
+    console.log('Extracting from pdf rates');
     const pdfParser = new PDFParser();
 
     pdfParser.on('pdfParser_dataError', (errData) => console.error(errData.parserError));
     pdfParser.on('pdfParser_dataReady', (pdfData) => {
       fs.writeFile('./utils/extractor/rates.json', JSON.stringify(pdfData), (err) => {
         if (err) {
-          console.error(err);
+          Extractor.error(err);
         } else {
           Extractor.success();
         }
@@ -22,15 +23,17 @@ class Extractor {
   }
 
   static async success() {
+    console.log('Extracting from pdf rates');
     const ratesdata = Extractor.genarateRates();
     await Database.create.rates(ratesdata);
   }
 
-  static error() {
+  static error(err) {
     console.log('Error: ' + err);
   }
 
   static genarateRates() {
+    console.log('Genarating rates');
     const rates = {};
     let groupedRates = [];
     const currency = new RegExp(/^[A-Z]{3}(%2F[A-Z]+)?$/);
