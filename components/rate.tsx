@@ -12,7 +12,13 @@ const Rate: FC<Props> = async (props) => {
     <section className="flex py-4 w-full relative h-full justify-evenly flex-wrap flex-col items-center gap-5">
       <div className=" flex flex-col items-start text-center w-3/4 gap-2">
         <p className="font-bold text-xs text-center w-full">
-          Last updated · 03 Jan, 21:09 UTC
+          Last updated ·{' '}
+          {new Date(props.rate.date_published).toLocaleDateString('en-us', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
         </p>
         <p className="text-sm flex flex-col gap-2 text-zinc-300">
           We use the mid-market rate for our bank rate and converter. This is for
