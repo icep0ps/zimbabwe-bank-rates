@@ -1,3 +1,4 @@
+import Database from '@/utils/database/database';
 import Extractor from '@/utils/extractor/extractor.js';
 
 describe('generateRates return correct values', () => {
@@ -21,5 +22,13 @@ describe('generateRates return correct values', () => {
       ask_zwl: expect.any(Number),
       mid_zwl: expect.any(Number),
     });
+  });
+
+  test('create rates in db function to have neeb called', () => {
+    Extractor.genarateRates = jest.fn();
+    Database.create.rates = jest.fn();
+    Extractor.success();
+    jest.spyOn(Database.create, 'rates');
+    expect(Database.create.rates).toHaveBeenCalled();
   });
 });
