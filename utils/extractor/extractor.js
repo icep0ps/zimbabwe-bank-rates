@@ -10,13 +10,17 @@ class Extractor {
 
     pdfParser.on('pdfParser_dataError', (errData) => console.error(errData.parserError));
     pdfParser.on('pdfParser_dataReady', (pdfData) => {
-      fs.writeFile('./utils/extractor/rates.json', JSON.stringify(pdfData), (err) => {
-        if (err) {
-          Extractor.error(err);
-        } else {
-          Extractor.success();
+      fs.writeFile(
+        './utils/extractor/rates.json',
+        JSON.stringify(pdfData),
+        async (err) => {
+          if (err) {
+            Extractor.error(err);
+          } else {
+            await Extractor.success();
+          }
         }
-      });
+      );
     });
 
     pdfParser.loadPDF('./utils/extractor/rates.pdf');
@@ -25,6 +29,7 @@ class Extractor {
   static async success() {
     console.log('Extracting from pdf rates');
     const ratesdata = Extractor.genarateRates();
+    console.log('creating rates in database');
     await Database.create.rates(ratesdata);
   }
 
