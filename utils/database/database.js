@@ -18,14 +18,14 @@ class Database {
     async rates() {
       const sql = await Database.connect();
       const res = await sql`SELECT * FROM rates WHERE date_published =  '2024-03-08' `;
-      return res[0];
+      return res;
     },
 
     async offical(currency) {
       const sql = await Database.connect();
       const res =
         await sql`SELECT * FROM rates WHERE date_published = '2024-03-08' AND currency=${currency}`;
-      return res[0];
+      return res;
     },
   };
 
