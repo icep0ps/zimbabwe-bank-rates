@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "utils/extractor/extractor.js",
+    "jobs/extractor/extractor.js",
     "tests/utils/extractor.test.js"
   ],
   "exclude": ["node_modules"]

@@ -1,4 +1,4 @@
-import Getpdf from '@/utils/getpdf';
+import Getpdf from '@/services/getpdf';
 import Extractor from '@/utils/extractor/extractor';
 export const dynamic = 'force-dynamic';
 

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import PDFParser from 'pdf2json';
-import Database from '../database/database.js';
+import Database from '../../database/database.js';
 import data from './rates.json' assert { type: 'json' };
 
 class Extractor {
