@@ -1,0 +1,12 @@
+name: Get bank rates
+run-name: Rates creator
+on:
+  schedule:
+    - cron: '00 10 * * *'
+jobs:
+  Get-bank-rates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '21.6.2'
