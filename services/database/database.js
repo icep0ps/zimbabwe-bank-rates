@@ -1,4 +1,6 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+dotenv.config({ path: 'services/.env' });
+
 import postgres from 'postgres';
 
 class Database {

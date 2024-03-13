@@ -1,4 +1,4 @@
-import Database from '@/utils/database/database';
+import Database from '@/services/database/database';
 
 export const dynamic = 'force-dynamic'; // defaults to auto
 export async function GET(request: Request) {
