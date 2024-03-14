@@ -14,4 +14,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '21.6.2'
+      - run: npm install
       - run: npm run get-rates
