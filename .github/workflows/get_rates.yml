@@ -11,6 +11,6 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: echo "Opening services directory"
-      - run: cd services
+      - working-directory: ./services
       - run: echo "Running Script"
       - run: npm run get-rates
