@@ -1,8 +1,6 @@
 name: Get bank rates
 run-name: Rates creator
 on:
-  schedule:
-    - cron: '00 10 * * *'
   workflow_dispatch:
 
 jobs:
