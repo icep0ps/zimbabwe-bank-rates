@@ -34,10 +34,18 @@ export default async function Home() {
   const rate = await getOfficalRate();
   const rates = await getRates();
 
-  return (
-    <>
-      <Rate rate={rate} rates={rates} />
-      <Rates rates={rates} />
-    </>
-  );
+  if (rates) {
+    return (
+      <>
+        {rates.length ? (
+          <Rate rate={rate} rates={rates} />
+        ) : (
+          <h1>No Offical rate found</h1>
+        )}
+        <Rates rates={rates} />
+      </>
+    );
+  }
+
+  return <h1>No Rates Found</h1>;
 }

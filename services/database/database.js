@@ -27,7 +27,6 @@ class Database {
       const sql = await Database.connect();
       const res =
         await sql`SELECT * FROM rates WHERE date_published = CURRENT_DATE AND currency=${currency}`;
-      console.offical(res);
       return res;
     },
   };
