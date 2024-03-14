@@ -3,10 +3,6 @@ run-name: Rates creator
 on:
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: services
-
 jobs:
   Get-bank-rates:
     runs-on: ubuntu-latest
@@ -14,5 +10,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '21.6.2'
-      - run: echo "Running Script"
-      - run: npm run get-rates
+      - name: Run Script
+        run: npm run get-rates
+        working-directory: services
