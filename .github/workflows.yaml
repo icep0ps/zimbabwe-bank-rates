@@ -3,6 +3,8 @@ run-name: Rates creator
 on:
   schedule:
     - cron: '00 10 * * *'
+  workflow_dispatch:
+
 jobs:
   Get-bank-rates:
     runs-on: ubuntu-latest
@@ -10,3 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '21.6.2'
+      - run: echo "Opening services directory"
+      - run: cd services
+      - run: echo "Running Script"
+      - run: npm run get-rates
