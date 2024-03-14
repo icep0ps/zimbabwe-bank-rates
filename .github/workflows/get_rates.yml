@@ -6,10 +6,11 @@ on:
 jobs:
   Get-bank-rates:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services
     steps:
       - uses: actions/setup-node@v4
         with:
           node-version: '21.6.2'
-      - name: Run Script
-        run: npm run get-rates
-        working-directory: services
+      - run: npm run get-rates
