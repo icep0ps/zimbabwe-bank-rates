@@ -5,7 +5,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./services
+    working-directory: services
 
 jobs:
   Get-bank-rates:
