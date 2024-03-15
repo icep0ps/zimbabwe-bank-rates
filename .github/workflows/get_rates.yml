@@ -24,12 +24,12 @@ jobs:
       - run: npm install
       - name: echo envs
         run: |
-          echo "${secrets.SB_HOST}"
-          echo "${secrets.SB_DATABASE}"
-          echo "${secrets.SB_PORT}"
-          echo "${secrets.SB_DB_PASSWORD}"
-          echo "${secrets.SB_USER}"
-          echo "${secrets.SB_DB_URL}"
+          echo "${SB_HOST}"
+          echo "${SB_DATABASE}"
+          echo "${SB_PORT}"
+          echo "${SB_DB_PASSWORD}"
+          echo "${SB_USER}"
+          echo "${SB_DB_URL}"
       - name: create env file
         run: |
           touch .env
