@@ -2,6 +2,14 @@ name: Get bank rates
 on:
   workflow_dispatch:
 
+env:
+  SB_HOST: ${{ secrets.SB_HOST }}
+  SB_DATABASE: ${{ secrets.SB_DATABASE }}
+  SB_PORT: ${{ secrets.SB_PORT }}
+  SB_DB_PASSWORD: ${{ secrets.SB_DB_PASSWORD }}
+  SB_USER: ${{ secrets.SB_USER }}
+  SB_DB_URL: ${{ secrets.SB_DB_URL }}
+
 jobs:
   Get-bank-rates:
     runs-on: ubuntu-latest
@@ -25,10 +33,10 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo "SB_HOST=${secrets.SB_HOST}" >> .env
-          echo "SB_DATABASE=${secrets.SB_DATABASE}" >> .env
-          echo "SB_PORT=${secrets.SB_PORT}" >> .env
-          echo "SB_DB_PASSWORD=${secrets.SB_DB_PASSWORD}" >> .env
-          echo "SB_USER=${secrets.SB_USER}" >> .env
-          echo "SB_DB_URL=${secrets.SB_DB_URL}" >> .env
+          echo "SB_HOST=${SB_HOST}" >> .env
+          echo "SB_DATABASE=${SB_DATABASE}" >> .env
+          echo "SB_PORT=${SB_PORT}" >> .env
+          echo "SB_DB_PASSWORD=${SB_DB_PASSWORD}" >> .env
+          echo "SB_USER=${SB_USER}" >> .env
+          echo "SB_DB_URL=${SB_DB_URL}" >> .env
       - run: npm run get-rates
