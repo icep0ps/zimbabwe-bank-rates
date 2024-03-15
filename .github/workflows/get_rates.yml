@@ -3,12 +3,12 @@ on:
   workflow_dispatch:
 
 env:
-  SB_HOST: ${{ vars.SB_HOST }}
-  SB_DATABASE: ${{ vars.SB_DATABASE }}
-  SB_PORT: ${{ vars.SB_PORT }}
-  SB_DB_PASSWORD: ${{ vars.SB_DB_PASSWORD }}
-  SB_USER: ${{ vars.SB_USER }}
-  SB_DB_URL: ${{ vars.SB_DB_URL }}
+  SB_HOST: ${{ secrets.SB_HOST }}
+  SB_DATABASE: ${{ secrets.SB_DATABASE }}
+  SB_PORT: ${{ secrets.SB_PORT }}
+  SB_DB_PASSWORD: ${{ secrets.SB_DB_PASSWORD }}
+  SB_USER: ${{ secrets.SB_USER }}
+  SB_DB_URL: ${{ secrets.SB_DB_URL }}
 
 jobs:
   Get-bank-rates:
@@ -21,15 +21,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '21.6.2'
-      - run: echo "This is the password $vars.vars.SB_DB_PASSWORD."
+      - run: echo "This is the password ${{secrets.SB_HOST}}"
       - run: npm install
-      - name: create env file
-        run: |
-          touch .env
-          echo "SB_HOST=${SB_HOST}" >> .env
-          echo "SB_DATABASE=${SB_DATABASE}" >> .env
-          echo "SB_PORT=${SB_PORT}" >> .env
-          echo "SB_DB_PASSWORD=${SB_DB_PASSWORD}" >> .env
-          echo "SB_USER=${SB_USER}" >> .env
-          echo "SB_DB_URL=${SB_DB_URL}" >> .env
+      # - name: create env file
+      #   run: |
+      #     touch .env
+      #     echo "SB_HOST=${SB_HOST}" >> .env
+      #     echo "SB_DATABASE=${SB_DATABASE}" >> .env
+      #     echo "SB_PORT=${SB_PORT}" >> .env
+      #     echo "SB_DB_PASSWORD=${SB_DB_PASSWORD}" >> .env
+      #     echo "SB_USER=${SB_USER}" >> .env
+      #     echo "SB_DB_URL=${SB_DB_URL}" >> .env
       - run: npm run get-rates
