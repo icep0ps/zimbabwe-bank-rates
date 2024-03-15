@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '21.6.2'
-      - run: echo "This is the password ${{vars.vars.SB_DB_PASSWORD}}."
+      - run: echo "This is the password $vars.vars.SB_DB_PASSWORD."
       - run: npm install
       - name: create env file
         run: |
