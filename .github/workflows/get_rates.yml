@@ -14,13 +14,21 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: npm install
+      - name: echo envs
+        run: |
+          echo "${secrets.SB_HOST}"
+          echo "${secrets.SB_DATABASE}"
+          echo "${secrets.SB_PORT}"
+          echo "${secrets.SB_DB_PASSWORD}"
+          echo "${secrets.SB_USER}"
+          echo "${secrets.SB_DB_URL}"
       - name: create env file
         run: |
           touch .env
-          echo "SB_HOST=${SB_HOST}" >> .env
-          echo "SB_DATABASE=${SB_DATABASE}" >> .env
-          echo "SB_PORT=${SB_PORT}" >> .env
-          echo "SB_DB_PASSWORD=${SB_DB_PASSWORD}" >> .env
-          echo "SB_USER=${SB_USER}" >> .env
-          echo "SB_DB_URL=${SB_DB_URL}" >> .env
+          echo "SB_HOST=${secrets.SB_HOST}" >> .env
+          echo "SB_DATABASE=${secrets.SB_DATABASE}" >> .env
+          echo "SB_PORT=${secrets.SB_PORT}" >> .env
+          echo "SB_DB_PASSWORD=${secrets.SB_DB_PASSWORD}" >> .env
+          echo "SB_USER=${secrets.SB_USER}" >> .env
+          echo "SB_DB_URL=${secrets.SB_DB_URL}" >> .env
       - run: npm run get-rates
