@@ -3,12 +3,12 @@ on:
   workflow_dispatch:
 
 env:
-  SB_HOST: ${{ secrets.SB_HOST }}
-  SB_DATABASE: ${{ secrets.SB_DATABASE }}
-  SB_PORT: ${{ secrets.SB_PORT }}
-  SB_DB_PASSWORD: ${{ secrets.SB_DB_PASSWORD }}
-  SB_USER: ${{ secrets.SB_USER }}
-  SB_DB_URL: ${{ secrets.SB_DB_URL }}
+  SB_HOST: ${{ vars.SB_HOST }}
+  SB_DATABASE: ${{ vars.SB_DATABASE }}
+  SB_PORT: ${{ vars.SB_PORT }}
+  SB_DB_PASSWORD: ${{ vars.SB_DB_PASSWORD }}
+  SB_USER: ${{ vars.SB_USER }}
+  SB_DB_URL: ${{ vars.SB_DB_URL }}
 
 jobs:
   Get-bank-rates:
@@ -22,14 +22,6 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: npm install
-      - name: echo envs
-        run: |
-          echo "${SB_HOST}"
-          echo "${SB_DATABASE}"
-          echo "${SB_PORT}"
-          echo "${SB_DB_PASSWORD}"
-          echo "${SB_USER}"
-          echo "${SB_DB_URL}"
       - name: create env file
         run: |
           touch .env
