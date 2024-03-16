@@ -1,10 +1,10 @@
 import { currency } from '@/types';
 import Rate from '@/components/rate';
 import Rates from '@/components/rates';
-
+export const runtime = 'edge';
 const getOfficalRate = async () => {
   try {
-    const data = await fetch('http://localhost:3000/api/rates/offical', {
+    const data = await fetch('http://127.0.0.1:3000/api/rates/offical', {
       method: 'GET',
       cache: 'no-store',
     });
@@ -18,7 +18,7 @@ const getOfficalRate = async () => {
 
 const getRates = async () => {
   try {
-    const data = await fetch('http://localhost:3000/api/rates', {
+    const data = await fetch('http://127.0.0.1:3000/api/rates', {
       method: 'GET',
       cache: 'no-store',
     });
