@@ -1,7 +1,9 @@
 import { currency } from '@/types';
 import Rate from '@/components/rate';
 import Rates from '@/components/rates';
-export const runtime = 'edge';
+
+export const dynamic = 'force-dynamic';
+
 const getOfficalRate = async () => {
   try {
     const data = await fetch('http://127.0.0.1:3000/api/rates/offical', {
