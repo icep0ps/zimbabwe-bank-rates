@@ -2,11 +2,9 @@ import { currency } from '@/types';
 import Rate from '@/components/rate';
 import Rates from '@/components/rates';
 
-export const dynamic = 'force-dynamic';
-
 const getOfficalRate = async () => {
   try {
-    const data = await fetch('http://0.0.0.0:3000/api/rates/offical', {
+    const data = await fetch('http://127.0.0.1:3000/api/rates/offical', {
       method: 'GET',
       cache: 'no-store',
     });
@@ -20,7 +18,7 @@ const getOfficalRate = async () => {
 
 const getRates = async () => {
   try {
-    const data = await fetch('http://0.0.0.0:3000/api/rates', {
+    const data = await fetch('http://127.0.0.1:3000/api/rates', {
       method: 'GET',
       cache: 'no-store',
     });
@@ -33,13 +31,19 @@ const getRates = async () => {
 };
 
 export default async function Home() {
-  const rate = await getOfficalRate();
-  const rates = await getRates();
+  const rate = await getOfficalRate().catch((error) => {
+    console.log('Error occured getting offical rate in component:' + error.message);
+    return null;
+  });
+  const rates = await getRates().catch((error) => {
+    console.log('Error occured getting rates in component:' + error.message);
+    return null;
+  });
 
   if (rates) {
     return (
       <>
-        {rates.length ? (
+        {rates.length && rate ? (
           <Rate rate={rate} rates={rates} />
         ) : (
           <h1>No Offical rate found</h1>
