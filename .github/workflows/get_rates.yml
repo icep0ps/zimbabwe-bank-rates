@@ -21,17 +21,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '21.6.2'
-      - name: show secret
-        run: echo "This is the password ${{secrets.SB_HOST}}"
-
       - run: npm install
-      # - name: create env file
-      #   run: |
-      #     touch .env
-      #     echo "SB_HOST=${SB_HOST}" >> .env
-      #     echo "SB_DATABASE=${SB_DATABASE}" >> .env
-      #     echo "SB_PORT=${SB_PORT}" >> .env
-      #     echo "SB_DB_PASSWORD=${SB_DB_PASSWORD}" >> .env
-      #     echo "SB_USER=${SB_USER}" >> .env
-      #     echo "SB_DB_URL=${SB_DB_URL}" >> .env
       - run: npm run get-rates
