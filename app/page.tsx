@@ -5,7 +5,9 @@ import Rate from '@/components/rate';
 import Rates from '@/components/rates';
 
 const baseurl =
-  process.env.NODE_ENV == 'production' ? process.env.VERCEL_URL : process.env.DEV_URL;
+  process.env.NODE_ENV == 'production'
+    ? process.env.NEXT_PUBLIC_VERCEL_URL
+    : process.env.DEV_URL;
 
 const getOfficalRate = async () => {
   try {
