@@ -1,3 +1,5 @@
+'use server';
+
 import { currency } from '@/types';
 import Rate from '@/components/rate';
 import Rates from '@/components/rates';
