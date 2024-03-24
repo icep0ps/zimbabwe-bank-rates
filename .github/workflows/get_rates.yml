@@ -1,5 +1,7 @@
 name: Get bank rates
 on:
+  schedule:
+    - cron:  '30 9 * * *'
   workflow_dispatch:
 
 env:
