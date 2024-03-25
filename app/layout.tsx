@@ -19,10 +19,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={poppins.className + ' dark'}>
       <body className="bg-neutral-950">
-        <main className="flex min-h-screen flex-col items-center justify-start px-24 gap-10 pb-5">
+        <main className="flex min-h-screen items-start justify-start gap-10 p-5 relative">
           <Navigation />
-          {children}
-          <Footer />
+          <section className="grid grid-cols-[2fr_1fr] w-full relative">
+            {children}
+          </section>
+          {/* <Footer /> */}
         </main>
       </body>
     </html>
