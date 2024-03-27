@@ -1,8 +1,8 @@
 'use server';
 
 import { currency } from '@/types';
-import Rate from '@/components/rate';
 import Rates from '@/components/rates';
+import Hero from '@/components/hero/hero';
 
 const baseurl =
   process.env.NODE_ENV == 'production'
@@ -13,7 +13,7 @@ const getOfficalRate = async () => {
   try {
     const data = await fetch(`${baseurl}/api/rates/offical`, {
       method: 'GET',
-      cache: 'no-store',
+      cache: 'force-cache',
     });
 
     const rates = await data.json();
@@ -27,7 +27,7 @@ const getRates = async () => {
   try {
     const data = await fetch(`${baseurl}/api/rates`, {
       method: 'GET',
-      cache: 'no-store',
+      cache: 'force-cache',
     });
 
     const rates = await data.json();
@@ -51,10 +51,37 @@ export default async function Home() {
     return (
       <>
         {rates.length && rate ? (
-          <Rate rate={rate} rates={rates} />
+          <Hero rate={rate} rates={rates} />
         ) : (
           <h1>No Offical rate found</h1>
         )}
+
+        <div className="flex">
+          <div className="p-4 border-r-2">
+            <h6 className="text-zinc-300">Bid</h6>
+            <p className="text-2xl font-semibold">29304 USD</p>
+          </div>
+
+          <div className="p-4 border-r-2">
+            <h6 className="text-zinc-300">Ask</h6>
+            <p className="text-2xl font-semibold">29304 USD</p>
+          </div>
+
+          <div className="p-4 border-r-2">
+            <h6 className="text-zinc-300">Mid</h6>
+            <p className="text-2xl font-semibold">29304 USD</p>
+          </div>
+
+          <div className="p-4 border-r-2">
+            <h6 className="text-zinc-300">Bid (ZWL)</h6>
+            <p className="text-2xl font-semibold">29304 ZWL</p>
+          </div>
+
+          <div className="p-4 border-r-2">
+            <h6 className="text-zinc-300">Ask (ZWL)</h6>
+            <p className="text-2xl font-semibold">29304 ZWL</p>
+          </div>
+        </div>
         <Rates rates={rates} />
       </>
     );
