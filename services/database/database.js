@@ -1,16 +1,16 @@
 import dotenv from 'dotenv';
-dotenv.config({ path: 'services/.env' });
-
 import postgres from 'postgres';
+import Locals from '@/providers/locals';
+dotenv.config({ path: 'services/.env' });
 
 class Database {
   static async connect() {
     const client = postgres({
-      host: process.env.SB_HOST,
-      user: process.env.SB_USER,
-      database: process.env.SB_DATABASE,
-      password: process.env.SB_DB_PASSWORD,
-      port: process.env.SB_PORT,
+      host: Locals.config().host,
+      user: Locals.config().user,
+      database: Locals.config().database,
+      password: Locals.config().password,
+      port: Locals.config().port,
     });
 
     return client;
