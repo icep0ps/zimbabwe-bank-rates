@@ -1,8 +1,12 @@
 'use server';
 
 import { currency } from '@/types';
-import Rates from '@/components/rates';
+import RatesTable from '@/components/ratesTable';
 import Hero from '@/components/hero/hero';
+import Chart from '@/components/chart/chart';
+import { faker } from '@faker-js/faker';
+import Converter from '@/components/converter/converter';
+import Rates from '@/components/rates';
 
 const baseurl =
   process.env.NODE_ENV == 'production'
@@ -56,33 +60,79 @@ export default async function Home() {
           <h1>No Offical rate found</h1>
         )}
 
-        <div className="flex">
-          <div className="p-4 border-r-2">
-            <h6 className="text-zinc-300">Bid</h6>
-            <p className="text-2xl font-semibold">29304 USD</p>
-          </div>
+        <div className=" bg-zinc-900 p-5 rounded-2xl">
+          <h1>Stock</h1>
+          <p>Lipsum dolor sit amet, consectetur adipiscing elit</p>
+          <div className="flex justify-between  py-10">
+            <div className=" pl-0 pr-5">
+              <h6 className="text-zinc-300 uppercase">Bid</h6>
+              <p className="text-2xl ">
+                {faker.number.float({
+                  fractionDigits: 2,
+                  min: 1000,
+                  max: 10000,
+                })}
+                USD
+              </p>
+              <p className="text-xs text-zinc-300">+19% from last month</p>
+            </div>
 
-          <div className="p-4 border-r-2">
-            <h6 className="text-zinc-300">Ask</h6>
-            <p className="text-2xl font-semibold">29304 USD</p>
-          </div>
+            <div className=" px-5">
+              <h6 className="text-zinc-300 uppercase">Ask</h6>
+              <p className="text-2xl ">
+                {faker.number.float({
+                  fractionDigits: 2,
+                  min: 1000,
+                  max: 10000,
+                })}
+                USD
+              </p>
+              <p className="text-xs text-zinc-300">-13% from last month</p>
+            </div>
 
-          <div className="p-4 border-r-2">
-            <h6 className="text-zinc-300">Mid</h6>
-            <p className="text-2xl font-semibold">29304 USD</p>
-          </div>
+            <div className=" px-5">
+              <h6 className="text-zinc-300 uppercase">Mid</h6>
+              <p className="text-2xl ">
+                {faker.number.float({
+                  fractionDigits: 2,
+                  min: 1000,
+                  max: 10000,
+                })}
+                USD
+              </p>
+              <p className="text-xs text-zinc-300">+0.02% from last month</p>
+            </div>
 
-          <div className="p-4 border-r-2">
-            <h6 className="text-zinc-300">Bid (ZWL)</h6>
-            <p className="text-2xl font-semibold">29304 ZWL</p>
-          </div>
+            <div className=" px-5">
+              <h6 className="text-zinc-300 uppercase">Bid (ZWL)</h6>
+              <p className="text-2xl ">
+                {faker.number.float({
+                  fractionDigits: 2,
+                  min: 1000,
+                  max: 10000,
+                })}
+                ZWL
+              </p>
+              <p className="text-xs text-zinc-300">+90% from last month</p>
+            </div>
 
-          <div className="p-4 border-r-2">
-            <h6 className="text-zinc-300">Ask (ZWL)</h6>
-            <p className="text-2xl font-semibold">29304 ZWL</p>
+            <div className=" px-5">
+              <h6 className="text-zinc-300 uppercase">Ask (ZWL)</h6>
+              <p className="text-2xl ">
+                {faker.number.float({
+                  fractionDigits: 2,
+                  min: 1000,
+                  max: 10000,
+                })}
+                ZWL
+              </p>
+              <p className="text-xs text-zinc-300">-0.2% from last month</p>
+            </div>
           </div>
         </div>
-        <Rates rates={rates} />
+        <Rates />
+        {/* <Converter rates={rates} rate={rate as currency} /> */}
+        <RatesTable rates={rates} />
       </>
     );
   }

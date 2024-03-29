@@ -4,7 +4,7 @@ type Props = {};
 
 const Navigation = (props: Props) => {
   return (
-    <nav className="flex items-start w-full">
+    <nav className="flex items-start w-full py-5">
       <ul className="flex gap-5 capitalize w-full ">
         <li>
           <Link href={'/#rate'} className="normal-case">
