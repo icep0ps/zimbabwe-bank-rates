@@ -16,9 +16,7 @@ const Navigation = (props: Props) => {
         <li>
           <Link href={'/#exchange_rates'}>Exchange rates</Link>
         </li>
-        <li>
-          <Link href={'/#exchange_rates'}>Currency converter </Link>
-        </li>
+
         <li>
           <Link href={'/faq'}>About</Link>
         </li>

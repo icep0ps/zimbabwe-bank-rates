@@ -39,7 +39,7 @@ const ConverterModule = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 w-full">
       <select
         id="selected-currenct"
         onChange={handleCurrencyChange}
@@ -57,7 +57,7 @@ const ConverterModule = (props: Props) => {
         ))}
       </select>
 
-      <span className="w-full border-input border rounded-lg py-3 px-2">
+      <span className="w-full border-input border rounded-lg py-3 px-2 flex">
         <span className="bg-border p-2 rounded-lg text-sm mr-3">{currency.value}</span>
         <input
           min={0}

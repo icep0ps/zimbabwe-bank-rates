@@ -3,7 +3,6 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/navigation/navigation';
 import Footer from '@/components/footer/footer';
-import { BackgroundBeams } from '@/components/ui/background-beams';
 
 export const metadata: Metadata = {
   title: 'Zimbabwe Bank Rate',
@@ -19,8 +18,8 @@ const poppins = Poppins({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.className + ' dark'}>
-      <body className="bg-neutral-950">
-        <main className="flex flex-col min-h-screen items-start justify-start gap-10 p-5 relative">
+      <body className="bg-background">
+        <main className="flex flex-col min-h-screen items-start justify-start gap-10 p-5 relative ">
           <Navigation />
           <section className="flex flex-col w-full relative gap-10">{children}</section>
           {/* <Footer /> */}

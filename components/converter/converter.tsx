@@ -31,54 +31,44 @@ const CurrencyConverter: FC<Props> = (props) => {
   }, [primaryAmout, secondaryCurrency.currency]);
 
   return (
-    <section className="flex flex-col gap-5 w-full p-4" id="rate">
-      <h1 className="text-3xl">Rates Converter</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem blanditiis, natus
-        non totam reprehenderit quo
-      </p>
-      <div className="flex justify-between items-start ">
-        <div className="flex flex-col gap-3 self-start h-full">
-          <span className="w-full border-input border rounded-lg py-3 px-2">
-            <span className="bg-border p-2 rounded-lg text-sm mr-3">ZWL</span>
-            <input
-              min={'0'}
-              type="number"
-              id="currency"
-              value={primaryAmout}
-              className="bg-background outline-none"
-              onChange={(event) => {
-                setPriamaryAmount(parseFloat(event.target.value).toString());
-              }}
-            />
-          </span>
-          <span className="self-start">
-            <p className="text-zinc-300">Exchange rate</p>
-            <p className="font-bold flex gap-2">
-              1 {secondaryCurrency.currency}
-              <MoveRight /> {secondaryCurrency.mid_zwl} Zimbabwean dollars
-            </p>
-          </span>
-        </div>
-        <div className="bg-border p-5 rounded-full flex items-center justify-center h-fit">
-          <ArrowRightLeft size={30} />
-        </div>
-
-        <ConverterModule
-          currency={{
-            value: secondaryCurrency.currency,
-            setCurrency: setSecondaryCurrency,
+    <div className="flex flex-col justify-between items-start w-3/4 gap-5">
+      <span className="w-full border-input border rounded-lg py-3 px-2 flex">
+        <span className="bg-border p-2 rounded-lg text-sm mr-3">ZWL</span>
+        <input
+          min={'0'}
+          type="number"
+          id="currency"
+          value={primaryAmout}
+          className="bg-background outline-none"
+          onChange={(event) => {
+            setPriamaryAmount(parseFloat(event.target.value).toString());
           }}
-          amount={{
-            value: secondaryAmount,
-            setAmount: (event) => {
-              setSecondaryAmount(event.target.value);
-            },
-          }}
-          rates={props.rates}
         />
+      </span>
+
+      <ConverterModule
+        currency={{
+          value: secondaryCurrency.currency,
+          setCurrency: setSecondaryCurrency,
+        }}
+        amount={{
+          value: secondaryAmount,
+          setAmount: (event) => {
+            setSecondaryAmount(event.target.value);
+          },
+        }}
+        rates={props.rates}
+      />
+      <div className="flex flex-col gap-3 self-start h-full w-full">
+        {/* <span className="self-start">
+          <p className="text-zinc-300 text-xs">Exchange rate</p>
+          <p className="font-bold flex gap-2">
+            1 {secondaryCurrency.currency}
+            <MoveRight /> {secondaryCurrency.mid_zwl} Zimbabwean dollars
+          </p>
+        </span> */}
       </div>
-    </section>
+    </div>
   );
 };
 
