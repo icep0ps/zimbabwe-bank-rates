@@ -7,7 +7,7 @@ const Rates = (props: Props) => {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4 mb-5">
-        <h1 className="text-3xl font-bold" id="exchange_rates">
+        <h1 className="text-3xl font-bold text-primary" id="exchange_rates">
           Other currencies
         </h1>
         <p className={'text-sx'}>

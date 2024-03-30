@@ -17,7 +17,7 @@ type Props = {
 const RatesTable: FC<Props> = (props) => {
   return (
     <div className="w-full flex flex-col gap-8">
-      <h1 className="text-3xl font-bold" id="exchange_rates">
+      <h1 className="text-3xl font-bold text-primary" id="exchange_rates">
         All exchange rates
       </h1>
       <p className={'text-sx'}>

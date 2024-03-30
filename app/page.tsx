@@ -60,11 +60,13 @@ export default async function Home() {
           <h1>No Offical rate found</h1>
         )}
 
-        <div className=" bg-zinc-900 p-5 rounded-2xl">
-          <h1>Stock</h1>
-          <p>Lipsum dolor sit amet, consectetur adipiscing elit</p>
+        <div className="p-5 border  rounded-3xl">
+          <h1 className="text-xl mb font-bold">Currency statistics</h1>
+          <p className="text-xs font-normal">
+            We use the mid-market rate for our bank rate and converter.
+          </p>
           <div className="flex justify-between  py-10">
-            <div className=" pl-0 pr-5">
+            <div className=" pl-0 pr-5 border-r">
               <h6 className="text-zinc-300 uppercase">Bid</h6>
               <p className="text-2xl ">
                 {faker.number.float({
@@ -77,7 +79,7 @@ export default async function Home() {
               <p className="text-xs text-zinc-300">+19% from last month</p>
             </div>
 
-            <div className=" px-5">
+            <div className=" px-5 border-r">
               <h6 className="text-zinc-300 uppercase">Ask</h6>
               <p className="text-2xl ">
                 {faker.number.float({
@@ -90,7 +92,7 @@ export default async function Home() {
               <p className="text-xs text-zinc-300">-13% from last month</p>
             </div>
 
-            <div className=" px-5">
+            <div className=" px-5 border-r">
               <h6 className="text-zinc-300 uppercase">Mid</h6>
               <p className="text-2xl ">
                 {faker.number.float({
@@ -103,7 +105,7 @@ export default async function Home() {
               <p className="text-xs text-zinc-300">+0.02% from last month</p>
             </div>
 
-            <div className=" px-5">
+            <div className=" px-5 border-r">
               <h6 className="text-zinc-300 uppercase">Bid (ZWL)</h6>
               <p className="text-2xl ">
                 {faker.number.float({

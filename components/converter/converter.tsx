@@ -32,7 +32,12 @@ const CurrencyConverter: FC<Props> = (props) => {
 
   return (
     <section className="flex flex-col gap-5 w-full p-4" id="rate">
-      <div className="flex justify-evenly items-start ">
+      <h1 className="text-3xl">Rates Converter</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem blanditiis, natus
+        non totam reprehenderit quo
+      </p>
+      <div className="flex justify-between items-start ">
         <div className="flex flex-col gap-3 self-start h-full">
           <span className="w-full border-input border rounded-lg py-3 px-2">
             <span className="bg-border p-2 rounded-lg text-sm mr-3">ZWL</span>
@@ -47,7 +52,7 @@ const CurrencyConverter: FC<Props> = (props) => {
               }}
             />
           </span>
-          <span className="self-end">
+          <span className="self-start">
             <p className="text-zinc-300">Exchange rate</p>
             <p className="font-bold flex gap-2">
               1 {secondaryCurrency.currency}
