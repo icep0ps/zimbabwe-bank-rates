@@ -7,6 +7,8 @@ import Chart from '@/components/chart/chart';
 import { faker } from '@faker-js/faker';
 import Converter from '@/components/converter/converter';
 import Rates from '@/components/rates';
+import Faq from '@/components/faq/faq';
+import Footer from '@/components/footer/footer';
 
 const baseurl =
   process.env.NODE_ENV == 'production'
@@ -135,6 +137,8 @@ export default async function Home() {
         <Rates />
         {/* <Converter rates={rates} rate={rate as currency} /> */}
         <RatesTable rates={rates} />
+        <Faq />
+        <Footer />
       </>
     );
   }
