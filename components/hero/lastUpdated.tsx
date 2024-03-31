@@ -16,6 +16,9 @@ const LastUpdated = (props: Props) => {
           month: 'long',
           day: 'numeric',
         })}
+        {new Date() !== props.date_published && (
+          <span className="text-red-700 uppercase"> (Outdated)</span>
+        )}
       </p>
     </div>
   );

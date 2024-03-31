@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import postgres from 'postgres';
-import Locals from '@/providers/locals';
+import Locals from '../../providers/locals.js';
+
 dotenv.config({ path: 'services/.env' });
 
 class Database {
@@ -20,6 +21,12 @@ class Database {
     async rates() {
       const sql = await Database.connect();
       const res = await sql`SELECT * FROM rates WHERE date_published =  CURRENT_DATE `;
+
+      if (res.count === 0) {
+        const lastUpatedCurrencies =
+          await sql`SELECT * FROM rates ORDER BY date_published ASC LIMIT 41`;
+        return lastUpatedCurrencies;
+      }
       return res;
     },
 
@@ -27,6 +34,14 @@ class Database {
       const sql = await Database.connect();
       const res =
         await sql`SELECT * FROM rates WHERE date_published = CURRENT_DATE AND currency=${currency}`;
+
+      if (res.count === 0) {
+        const res = await sql`SELECT * FROM rates WHERE currency=${currency}`;
+        const lastRate = res.pop();
+        if (lastRate) {
+          return [lastRate];
+        }
+      }
       return res;
     },
   };
