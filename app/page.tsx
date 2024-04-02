@@ -6,7 +6,7 @@ import Rates from '@/components/rates';
 import Faq from '@/components/faq/faq';
 import Hero from '@/components/hero/hero';
 import Footer from '@/components/footer/footer';
-import RatesTable from '@/components/ratesTable';
+import { DataTableDemo as RatesTable } from '@/components/ratesTable';
 import Statistics from '@/components/statistics/statistics';
 
 const baseurl =
@@ -52,14 +52,10 @@ export default async function Home() {
     return null;
   });
 
-  if (rates) {
+  if (rates?.length) {
     return (
       <>
-        {rates.length && rate ? (
-          <Hero rate={rate} rates={rates} />
-        ) : (
-          <h1>No Offical rate found</h1>
-        )}
+        {rate ? <Hero rate={rate} rates={rates} /> : <h1>No Offical rate found</h1>}
         <Statistics />
         <Rates />
         <RatesTable rates={rates} />
