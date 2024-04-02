@@ -1,5 +1,5 @@
-import { Input } from '@/components/ui/input';
 import { currency } from '../../../types';
+import { Input } from '@/components/ui/input';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 type Props = {
@@ -40,6 +40,18 @@ const ConverterModule = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-3 w-full">
+      <span className="w-full border-input border rounded-lg py-3 px-2 flex">
+        <span className="bg-border p-2 rounded-lg text-sm mr-3">{currency.value}</span>
+        <input
+          min={0}
+          id="amount"
+          type="number"
+          value={amount.value}
+          className="  bg-background outline-none"
+          onChange={amount.setAmount}
+        />
+      </span>
+
       <select
         id="selected-currenct"
         onChange={handleCurrencyChange}
@@ -56,18 +68,6 @@ const ConverterModule = (props: Props) => {
           </option>
         ))}
       </select>
-
-      <span className="w-full border-input border rounded-lg py-3 px-2 flex">
-        <span className="bg-border p-2 rounded-lg text-sm mr-3">{currency.value}</span>
-        <input
-          min={0}
-          id="amount"
-          type="number"
-          value={amount.value}
-          className="  bg-background outline-none"
-          onChange={amount.setAmount}
-        />
-      </span>
 
       <div className="flex gap-2" id="recently-selected">
         {recentlyUsedCurrencies.map((currency) => {

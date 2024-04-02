@@ -59,15 +59,6 @@ const CurrencyConverter: FC<Props> = (props) => {
         }}
         rates={props.rates}
       />
-      <div className="flex flex-col gap-3 self-start h-full w-full">
-        {/* <span className="self-start">
-          <p className="text-zinc-300 text-xs">Exchange rate</p>
-          <p className="font-bold flex gap-2">
-            1 {secondaryCurrency.currency}
-            <MoveRight /> {secondaryCurrency.mid_zwl} Zimbabwean dollars
-          </p>
-        </span> */}
-      </div>
     </div>
   );
 };
