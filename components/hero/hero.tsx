@@ -1,10 +1,7 @@
 import { FC } from 'react';
 import Rate from './rate';
-import Chart from '../chart/chart';
 import { currency } from '../../types';
 import LastUpdated from './lastUpdated';
-import { Spotlight } from '../ui/Spotlight';
-import { BackgroundBeams } from '../ui/background-beams';
 import CurrencyConverter from '../converter/converter';
 
 type Props = {
