@@ -1,5 +1,6 @@
 import React from 'react';
 import Chart from '../chart/chart';
+import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 
 type Props = {
   date_published: Date;
@@ -7,8 +8,8 @@ type Props = {
 
 const LastUpdated = (props: Props) => {
   return (
-    <div className="w-fit h-full">
-      <p className="font-bold text-xs text-right w-full">
+    <div className="w-full h-full flex flex-col gap-3">
+      <p className="font-bold text-xs text-left">
         Last updated ·{' '}
         {new Date(props.date_published).toLocaleDateString('en-us', {
           weekday: 'long',
@@ -16,10 +17,17 @@ const LastUpdated = (props: Props) => {
           month: 'long',
           day: 'numeric',
         })}
-        {new Date() !== props.date_published && (
-          <span className="text-red-700 uppercase"> (Outdated)</span>
-        )}
       </p>
+
+      {new Date() !== props.date_published && (
+        <div className="flex items-center gap-3">
+          <div>
+            <p className="text-xs flex font-bold">Rate status: Outdated</p>
+            <p className="text-xs flex ">+0.02% from last month</p>
+          </div>
+          <ArrowTopRightIcon scale={'400'} />
+        </div>
+      )}
     </div>
   );
 };
