@@ -59,7 +59,7 @@ class Database {
           return null;
         }
       } catch (error) {
-        throw new Error('Error adding user to waitlist: ', error);
+        throw new Error('Error adding user to waitlist: ' + error);
       }
     },
 
