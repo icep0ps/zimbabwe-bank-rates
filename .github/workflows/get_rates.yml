@@ -24,4 +24,5 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: npm install
+      - run: npm install dotenv --save
       - run: npm run get-rates
