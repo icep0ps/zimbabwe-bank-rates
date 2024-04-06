@@ -1,3 +1,5 @@
+const dotenv = require('dotenv/config');
+
 class Locals {
   static config() {
     for (const [key, value] of Object.entries(process.env)) {
@@ -21,12 +23,13 @@ class Locals {
       port: process.env.PROD_DB_PORT,
     };
 
+    console.log(dev);
+
     if (process.env.NODE_ENV === 'test') return dev;
     if (process.env.NODE_ENV === 'production') return prod;
-    if (process.env.NODE_ENV === 'development') return dev;
 
-    throw new Error('Unknown node environment');
+    return dev;
   }
 }
 
-export default Locals;
+module.exports = Locals;

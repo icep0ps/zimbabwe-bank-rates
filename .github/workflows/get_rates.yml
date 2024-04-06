@@ -1,16 +1,16 @@
 name: Get bank rates
 on:
   schedule:
-    - cron:  '30 9 * * *'
+    - cron: '30 9 * * *'
   workflow_dispatch:
 
 env:
-  SB_HOST: ${{ secrets.SB_HOST }}
-  SB_DATABASE: ${{ secrets.SB_DATABASE }}
-  SB_PORT: ${{ secrets.SB_PORT }}
-  SB_DB_PASSWORD: ${{ secrets.SB_DB_PASSWORD }}
-  SB_USER: ${{ secrets.SB_USER }}
-  SB_DB_URL: ${{ secrets.SB_DB_URL }}
+  PROD_DB_HOST: ${{ secrets.PROD_DB_HOST }}
+  PROD_DB_DATABASE: ${{ secrets.PROD_DB_DATABASE }}
+  PROD_DB_PORT: ${{ secrets.PROD_DB_PORT }}
+  PROD_DB_PASSWORD: ${{ secrets.PROD_DB_PASSWORD }}
+  PROD_DB_USER: ${{ secrets.PROD_DB_USER }}
+  PROD_DB_URL: ${{ secrets.PROD_DB_URL }}
 
 jobs:
   Get-bank-rates:

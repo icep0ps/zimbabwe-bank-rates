@@ -1,5 +1,5 @@
-import Database from '@/utils/database/database';
-import Extractor from '@/utils/extractor/extractor.js';
+import Database from '../../services/database/database';
+import Extractor from '../../services/rates/extractor/extractor.js';
 
 describe('generateRates return correct values', () => {
   test('returns an object', () => {
