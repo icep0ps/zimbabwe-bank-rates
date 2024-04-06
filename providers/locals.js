@@ -1,5 +1,3 @@
-const dotenv = require('dotenv/config');
-
 class Locals {
   static config() {
     for (const [key, value] of Object.entries(process.env)) {
