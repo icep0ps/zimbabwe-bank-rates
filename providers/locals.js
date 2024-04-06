@@ -1,4 +1,4 @@
-require('dotenv/config');
+require('dotenv').config();
 
 class Locals {
   static config() {
