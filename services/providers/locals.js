@@ -1,4 +1,4 @@
-import 'dotenv/config.js';
+import 'dotenv/config';
 
 class Locals {
   static config() {

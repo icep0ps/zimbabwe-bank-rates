@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import postgres from 'postgres';
-import Locals from '../../providers/locals.mjs';
+import Locals from '../providers/locals.js';
 
 dotenv.config({ path: 'services/.env' });
 
