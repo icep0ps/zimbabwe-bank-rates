@@ -30,4 +30,4 @@ class Locals {
   }
 }
 
-module.exports = Locals;
+export default Locals;
