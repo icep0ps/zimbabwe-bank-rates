@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 class Locals {
   static config() {
     for (const [key, value] of Object.entries(process.env)) {
@@ -20,8 +22,6 @@ class Locals {
       password: process.env.PROD_DB_PASSWORD,
       port: process.env.PROD_DB_PORT,
     };
-
-    console.log(dev);
 
     if (process.env.NODE_ENV === 'test') return dev;
     if (process.env.NODE_ENV === 'production') return prod;
