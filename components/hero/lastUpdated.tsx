@@ -22,7 +22,9 @@ const LastUpdated = (props: Props) => {
       {new Date() !== props.date_published && (
         <div className="flex items-center gap-3">
           <div>
-            <p className="text-xs flex font-bold">Rate status: Outdated</p>
+            <p className="text-xs flex font-bold">
+              Rate status: <span className="text-red-600 pl-2"> Outdated</span>
+            </p>
             <p className="text-xs flex ">+0.02% from last month</p>
           </div>
           <ArrowTopRightIcon scale={'400'} />

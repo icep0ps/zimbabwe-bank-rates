@@ -6,13 +6,13 @@ import Rates from '@/components/rates';
 import Faq from '@/components/faq/faq';
 import Hero from '@/components/hero/hero';
 import Footer from '@/components/footer/footer';
-import { DataTableDemo as RatesTable } from '@/components/ratesTable';
+import { RatesTable } from '@/components/ratesTable/table';
 import Statistics from '@/components/statistics/statistics';
 
 const baseurl =
   process.env.NODE_ENV == 'production'
     ? process.env.NEXT_PUBLIC_VERCEL_URL
-    : process.env.DEV_URL;
+    : process.env.NEXT_PUBLIC_DEV_URL;
 
 const getOfficalRate = async () => {
   try {
@@ -58,7 +58,7 @@ export default async function Home() {
         {rate ? <Hero rate={rate} rates={rates} /> : <h1>No Offical rate found</h1>}
         <Statistics />
         <Rates />
-        <RatesTable rates={rates} />
+        <RatesTable data={rates} />
         <Faq />
         <Footer />
       </>
