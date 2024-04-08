@@ -1,4 +1,7 @@
-export default class Locals {
+const dotevn = require('dotenv');
+dotevn.config();
+
+class Locals {
   static config() {
     for (const [key, value] of Object.entries(process.env)) {
       if (value === undefined)
@@ -25,6 +28,8 @@ export default class Locals {
     if (process.env.NODE_ENV === 'production') return prod;
     if (process.env.NODE_ENV === 'development') return dev;
 
-    throw new Error('Unknown node environment');
+    return dev;
   }
 }
+
+module.exports = Locals;
