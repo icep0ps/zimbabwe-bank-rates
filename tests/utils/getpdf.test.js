@@ -1,4 +1,4 @@
-import Getpdf from './../../utils/getpdf.js';
+import Getpdf from '../../services/rates/getpdf.js';
 
 describe('Getpdf is working', () => {
   test('navigation function to have been called', () => {
@@ -21,6 +21,17 @@ describe('Getpdf is working', () => {
     });
 
     test('has been called with url', async () => {
+      const pdflink = 'https://example.com';
+      Getpdf.navigate = jest.fn().mockReturnValueOnce(pdflink);
+
+      Getpdf.downloadpdf = jest.fn();
+      jest.spyOn(Getpdf, 'downloadpdf');
+
+      await Getpdf.run();
+      expect(Getpdf.downloadpdf).toHaveBeenCalledWith(pdflink);
+    });
+
+    test('has created rates pdf', async () => {
       const pdflink = 'https://example.com';
       Getpdf.navigate = jest.fn().mockReturnValueOnce(pdflink);
 
