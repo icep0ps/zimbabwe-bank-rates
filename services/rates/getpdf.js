@@ -7,12 +7,12 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 class Getpdf {
   static async run() {
     const url = await Getpdf.navigate();
-    Getpdf.downloadpdf(url);
+    return await Getpdf.downloadpdf(url);
   }
 
   static async navigate() {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       ignoreHTTPSErrors: true,
       args: ['--disable-features=site-per-process'],
     });
@@ -48,15 +48,17 @@ class Getpdf {
     return links[links.length - 1];
   }
 
-  static downloadpdf(url) {
+  static async downloadpdf(url) {
     console.log('downloading pdfs');
-    const file = fs.createWriteStream('utils/extractor/rates.pdf');
-    https.get(url, function (response) {
-      response.pipe(file);
-
-      file.on('finish', () => {
-        file.close();
-        console.log('Download Completed');
+    const file = fs.createWriteStream('./rates/extractor/rates.pdf');
+    return await new Promise((resolve) => {
+      https.get(url, async function (response) {
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          console.log('Download Completed');
+          resolve();
+        });
       });
     });
   }
