@@ -5,12 +5,12 @@ on:
   workflow_dispatch:
 
 env:
-  PROD_DB_HOST: ${{ secrets.PROD_DB_HOST }}
-  PROD_DB_DATABASE: ${{ secrets.PROD_DB_DATABASE }}
-  PROD_DB_PORT: ${{ secrets.PROD_DB_PORT }}
-  PROD_DB_PASSWORD: ${{ secrets.PROD_DB_PASSWORD }}
-  PROD_DB_USER: ${{ secrets.PROD_DB_USER }}
-  PROD_DB_URL: ${{ secrets.PROD_DB_URL }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_URL: ${{ secrets.DB_URL }}
 
 jobs:
   Get-bank-rates:
