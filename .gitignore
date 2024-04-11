@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env*.production
 
 # vercel
 .vercel
@@ -44,3 +45,5 @@ tests/utils/mocks/rates.pdf
 utils/main.js
 tests/mocks/rates.pdf
 utils/extractor/rates.json
+
+services/rates/extractor/rates.pdf

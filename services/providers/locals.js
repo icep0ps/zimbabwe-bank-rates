@@ -1,4 +1,7 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+
+if (process.env.NODE_ENV === 'production') dotenv.config({ path: ['.env.production'] });
+else dotenv.config({ path: ['.env.local'] });
 
 class Locals {
   static config() {
@@ -7,26 +10,13 @@ class Locals {
         throw new Error(`Please set ${key} in environment variables file`);
     }
 
-    const dev = {
-      host: process.env.DEV_DB_HOST,
-      user: process.env.DEV_DB_USER,
-      database: process.env.DEV_DB_DATABASE,
-      password: process.env.DEV_DB_PASSWORD,
-      port: process.env.DEV_DB_PORT,
+    return {
+      host: process.env.HOST,
+      user: process.env.USER,
+      database: process.env.DATABASE,
+      password: process.env.PASSWORD,
+      port: process.env.PORT,
     };
-
-    const prod = {
-      host: process.env.PROD_DB_HOST,
-      user: process.env.PROD_DB_USER,
-      database: process.env.PROD_DB_DATABASE,
-      password: process.env.PROD_DB_PASSWORD,
-      port: process.env.PROD_DB_PORT,
-    };
-
-    if (process.env.NODE_ENV === 'test') return dev;
-    if (process.env.NODE_ENV === 'production') return prod;
-
-    return dev;
   }
 }
 
