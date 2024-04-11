@@ -1,4 +1,5 @@
 import fs from 'fs';
+import 'dotenv/config';
 import https from 'https';
 import puppeteer from 'puppeteer';
 
@@ -6,6 +7,7 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 class Getpdf {
   static async run() {
+    console.log('Running in: ' + process.env.NODE_ENV + ' mode');
     const url = await Getpdf.navigate();
     return await Getpdf.downloadpdf(url);
   }

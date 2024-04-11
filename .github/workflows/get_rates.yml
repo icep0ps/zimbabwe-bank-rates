@@ -24,4 +24,5 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: npm install
-      - run: npm run export NODE_ENV=production && get-rates
+      - run: export NODE_ENV=production
+      - run: npm run get-rates
