@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 
-if (process.env.NODE_ENV === 'production') dotenv.config({ path: ['.env.production'] });
-else dotenv.config({ path: ['.env.local'] });
+if (process.env.NODE_ENV === 'production') dotenv.config({ path: '.env.production' });
+else dotenv.config({ path: '.env.local' });
 
 class Locals {
   static config() {
@@ -12,7 +12,7 @@ class Locals {
 
     return {
       host: process.env.HOST,
-      user: process.env.USER,
+      user: process.env.DB_USER,
       database: process.env.DATABASE,
       password: process.env.PASSWORD,
       port: process.env.PORT,
