@@ -72,7 +72,6 @@ class Database {
         ratesArray.push({ currency: currencyName, ...rate_values });
       }
 
-      console.log(ratesArray);
       return await sql`INSERT INTO rates ${sql(
         ratesArray,
         'currency',
