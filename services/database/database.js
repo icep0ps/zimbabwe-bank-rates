@@ -80,7 +80,9 @@ class Database {
         'bid_zwl',
         'ask_zwl',
         'mid_zwl'
-      )}`;
+      )}`.catch((error) => {
+        throw new Error('Error creating rates: ' + error.message);
+      });
     },
   };
 }
