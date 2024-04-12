@@ -69,8 +69,6 @@ class Extractor {
       if (rate.length !== 0) groupedRates.push(rate);
     }
 
-    console.log(groupedRates);
-
     if (groupedRates.length !== currencies.length)
       throw new Error(
         `Error extracting data from pdf: Number of rates does not match number of currecies got ${currencies.length} currencies and ${groupedRates.length} rates`

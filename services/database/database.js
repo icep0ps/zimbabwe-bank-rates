@@ -71,6 +71,8 @@ class Database {
         const currencyName = currency.trim().replace('%2F', '/');
         ratesArray.push({ currency: currencyName, ...rate_values });
       }
+
+      console.log(ratesArray);
       return await sql`INSERT INTO rates ${sql(
         ratesArray,
         'currency',
