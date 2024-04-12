@@ -15,6 +15,7 @@ env:
 jobs:
   Get-bank-rates:
     runs-on: ubuntu-latest
+    environment: production
     defaults:
       run:
         working-directory: ${{ github.workspace }}/services
@@ -24,20 +25,4 @@ jobs:
         with:
           node-version: '21.6.2'
       - run: npm install
-      - name: Log Environment Variables
-        run: |
-          echo "Environment Variables:"
-          echo "DB_HOST: $DB_HOST"
-          echo "DB_DATABASE: $DB_DATABASE"
-          echo "DB_PORT: $DB_PORT"
-          echo "DB_PASSWORD: $DB_PASSWORD"
-          echo "DB_USER: $DB_USER"
-          echo "DB_URL: $DB_URL"
-        env:
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_URL: ${{ secrets.DB_URL }}
-      - run: export NODE_ENV=production && npm run get-rates
+      - run: npm run get-rates
