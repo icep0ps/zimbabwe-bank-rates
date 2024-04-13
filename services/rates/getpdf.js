@@ -32,7 +32,7 @@ class Getpdf {
       hrefElement
     );
 
-    console.log('navigating to rates');
+    console.log('navigating to rates: https://www.rbz.co.zw' + html);
     await page.goto('https://www.rbz.co.zw' + html, { waitUntil: 'domcontentloaded' });
 
     const links = [];
