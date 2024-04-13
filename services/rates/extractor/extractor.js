@@ -1,7 +1,5 @@
-import fs from 'fs';
 import PDFParser from 'pdf2json';
 import Database from '../../database/database.js';
-import data from './rates.json' assert { type: 'json' };
 
 class Extractor {
   static async read() {
@@ -14,26 +12,17 @@ class Extractor {
       pdfParser.on('pdfParser_dataError', (errData) =>
         console.error(errData.parserError)
       );
-      pdfParser.on('pdfParser_dataReady', (pdfData) => {
-        fs.writeFile(
-          './rates/extractor/rates.json',
-          JSON.stringify(pdfData),
-          async (err) => {
-            if (err) {
-              Extractor.error(err);
-            } else {
-              await Extractor.success();
-              resolve();
-            }
-          }
-        );
+      pdfParser.on('pdfParser_dataReady', async (pdfData) => {
+        const data = JSON.stringify(pdfData);
+        await Extractor.success(data);
+        resolve();
       });
     });
   }
 
-  static async success() {
+  static async success(pdfData) {
     console.log('Extracting from pdf rates');
-    const ratesdata = Extractor.genarateRates();
+    const ratesdata = Extractor.genarateRates(JSON.parse(pdfData));
     console.log('creating rates in database');
     await Database.create.rates(ratesdata);
   }
@@ -42,7 +31,7 @@ class Extractor {
     console.log('Error: ' + err);
   }
 
-  static genarateRates() {
+  static genarateRates(data) {
     console.log('Genarating rates');
     const rates = {};
     let groupedRates = [];
