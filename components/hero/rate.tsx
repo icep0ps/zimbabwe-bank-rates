@@ -13,7 +13,7 @@ const Rate = (props: Props) => {
       <div className="flex w-full gap-1">
         <h1 className="text-5xl font-extrabold text-left break-words">
           <span className="text-primary flex">{Number(props.mid_zwl).toFixed(3)}</span>
-          <span className="flex gap-4 items-end">United states dollars</span>
+          <span className="flex gap-4 items-end">Zimbabwe Gold </span>
         </h1>
       </div>
     </div>

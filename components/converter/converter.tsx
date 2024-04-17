@@ -33,7 +33,7 @@ const CurrencyConverter: FC<Props> = (props) => {
   return (
     <div className="flex flex-col justify-between items-start w-3/4 gap-5">
       <span className="w-full border-input border rounded-lg py-3 px-2 flex">
-        <span className="bg-border p-2 rounded-lg text-sm mr-3">ZWL</span>
+        <span className="bg-border p-2 rounded-lg text-sm mr-3">ZiG</span>
         <input
           min={'0'}
           type="number"
