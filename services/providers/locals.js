@@ -10,14 +10,6 @@ class Locals {
         throw new Error(`Please set ${key} in environment variables file`);
     }
 
-    console.log({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      database: process.env.DB_DATABASE,
-      password: process.env.DB_PASSWORD,
-      port: process.env.DB_PORT,
-    });
-
     return {
       host: process.env.DB_HOST,
       user: process.env.DB_USER,
