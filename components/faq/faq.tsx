@@ -10,7 +10,7 @@ type Props = {};
 
 const Faq = (props: Props) => {
   return (
-    <section className="flex flex-col gap-5">
+    <section className="flex flex-col gap-5" id="faq">
       <h1 className="capitalize text-3xl font-bold text-primary">
         frequently asked questions
       </h1>
@@ -23,21 +23,19 @@ const Faq = (props: Props) => {
         <AccordionItem value="item-1">
           <AccordionTrigger>Where do we get our data?</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            These values represent the daily average of the Bid and Ask rates published by
+            <span className="underline"> The Reserve Bank of Zimbabwe.</span>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>What currencies do we support?</AccordionTrigger>
           <AccordionContent>
-            Yes. It comes with default styles that matches the other components&apos;
-            aesthetic.
+            All currencies listed in The Reserve Bank of Zimbabwe exchange rate PDF.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>How often does the data update?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you prefer.
-          </AccordionContent>
+          <AccordionContent>Daily around 9-10 am</AccordionContent>
         </AccordionItem>
       </Accordion>
     </section>
