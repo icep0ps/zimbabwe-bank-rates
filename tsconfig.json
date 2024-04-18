@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "jobs/extractor/extractor.js",
-    "tests/utils/extractor.test.js"
-, "providers/locals.js"  ],
+    "tests/utils/extractor.test.js",
+    "services/providers/locals.js"
+  ],
   "exclude": ["node_modules"]
 }
