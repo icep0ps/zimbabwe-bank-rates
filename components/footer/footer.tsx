@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 type Props = {};
@@ -25,15 +26,25 @@ const Footer = (props: Props) => {
       <div className="flex gap-5">
         <ul className="flex flex-col gap-3">
           <h6 className="font-semibold">Home</h6>
-          <li className="capitalize text-zinc-300 text-sm">Today's rate</li>
-          <li className="capitalize text-zinc-300 text-sm">Exchange Rates</li>
+          <Link href={'/'}>
+            <li className="capitalize text-zinc-300 text-sm">Today's rate</li>
+          </Link>
+          <Link href={'/#exchange_rate'}>
+            <li className="capitalize text-zinc-300 text-sm">Exchange Rates</li>
+          </Link>
         </ul>
 
         <ul className="flex flex-col gap-3">
           <h6 className="font-semibold">Support</h6>
           <li className="capitalize text-zinc-300 text-sm">Contact</li>
-          <li className="capitalize text-zinc-300 text-sm">Contribute</li>
-          <li className="capitalize text-zinc-300 text-sm">frequently asked questions</li>
+          <Link href={'https://github.com/icep0ps/zimbabwe-bank-rates'} target="_blank">
+            <li className="capitalize text-zinc-300 text-sm">Contribute</li>
+          </Link>
+          <Link href={'#faq'}>
+            <li className="capitalize text-zinc-300 text-sm">
+              frequently asked questions
+            </li>
+          </Link>
         </ul>
       </div>
     </footer>
