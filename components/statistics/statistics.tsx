@@ -14,8 +14,8 @@ const Statistics = (props: Props) => {
         <Statistic name="Bid" />
         <Statistic name="Ask" />
         <Statistic name="Mid" />
-        <Statistic name="Bid (ZWL)" />
-        <Statistic name="Ask (ZWL)" />
+        <Statistic name="Bid (ZiG)" />
+        <Statistic name="Ask (ZiG)" />
       </div>
     </div>
   );

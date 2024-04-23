@@ -14,7 +14,7 @@ const Statistic = (props: Props) => {
           fractionDigits: 2,
           min: 1000,
           max: 10000,
-        })}
+        })}{' '}
         USD
       </p>
       <p className="text-xs text-zinc-300">+19% from last month</p>
