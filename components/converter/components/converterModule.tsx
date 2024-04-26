@@ -18,6 +18,8 @@ type Props = {
 
 const ConverterModule = (props: Props) => {
   const { currency, amount, rates } = props;
+
+  const [selectValue, setSelectValue] = useState<string>(currency.value);
   const [recentlyUsedCurrencies, setrecentlyUsedCurrencies] = useState<currency[]>([
     rates[1],
     rates[2],
@@ -30,12 +32,27 @@ const ConverterModule = (props: Props) => {
   const handleCurrencyChange = (
     event: ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
-    const currencyIsFound = findCurrency(event.currentTarget.value);
+    const currencyFound = findCurrency(event.currentTarget.value);
 
-    if (currencyIsFound) {
-      currency.setCurrency(currencyIsFound);
-      setrecentlyUsedCurrencies((prev) => [currencyIsFound, prev[0], prev[1]]);
+    if (currencyFound) {
+      if (
+        recentlyUsedCurrencies.some(
+          (currency) => currency.currency === currencyFound.currency
+        )
+      ) {
+        const array = recentlyUsedCurrencies.filter(
+          (currency) => currency.currency != currencyFound.currency
+        );
+
+        array.unshift(currencyFound);
+        currency.setCurrency(currencyFound);
+        setrecentlyUsedCurrencies((prev) => array);
+      } else {
+        currency.setCurrency(currencyFound);
+        setrecentlyUsedCurrencies((prev) => [currencyFound, prev[0], prev[1]]);
+      }
     }
+    setSelectValue(event.currentTarget.value);
   };
 
   return (
@@ -56,6 +73,7 @@ const ConverterModule = (props: Props) => {
         id="selected-currenct"
         onChange={handleCurrencyChange}
         defaultValue={currency.value}
+        value={selectValue}
         className="px-3 py-2 outline-none rounded-lg bg-background border-input border"
       >
         {rates.map((rate) => (
@@ -78,7 +96,7 @@ const ConverterModule = (props: Props) => {
               key={currency.currency}
               value={currency.currency}
               onClick={handleCurrencyChange}
-              className="bg-white text-black"
+              className="bg-white text-black cursor-pointer"
             />
           );
         })}
