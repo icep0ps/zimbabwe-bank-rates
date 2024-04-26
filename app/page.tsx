@@ -56,8 +56,8 @@ export default async function Home() {
     return (
       <>
         {rate ? <Hero rate={rate} rates={rates} /> : <h1>No Offical rate found</h1>}
-        <Statistics />
-        <Rates />
+        <Statistics data={rate} />
+        <Rates data={rates} />
         <RatesTable data={rates} />
         <Faq />
         <Footer />

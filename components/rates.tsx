@@ -1,9 +1,13 @@
-import { faker } from '@faker-js/faker';
 import React from 'react';
+import { currency } from '@/types';
+import { Currencies } from 'currencies-map';
 
-type Props = {};
+type Props = {
+  data: currency[];
+};
 
 const Rates = (props: Props) => {
+  const rates = props.data.slice(0, 4);
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4 mb-5">
@@ -18,37 +22,17 @@ const Rates = (props: Props) => {
       </div>
 
       <div className="flex gap-5">
-        <div className="w-full p-3 border rounded-lg  flex justify-between items-end relative">
-          <div className="w-5/6">
-            <h6 className=" uppercase text-3xl">{faker.finance.currencyCode()}</h6>
-            <p className="text-zinc-300">{faker.finance.currencyName()}</p>
+        {rates.map((rate) => (
+          <div className="w-full p-3 border rounded-lg  flex justify-between items-end relative">
+            <div className="w-5/6">
+              <h6 className=" uppercase text-3xl">{rate.currency}</h6>
+              <p className="text-zinc-300">
+                {Currencies.names.get(rate.currency.trim())}
+              </p>
+            </div>
+            <p className="text-xs ">+0.02% from last month</p>
           </div>
-          <p className="text-xs ">+0.02% from last month</p>
-        </div>
-
-        <div className="w-full  border rounded-lg p-3 flex justify-between items-end">
-          <div className="w-5/6">
-            <h6 className=" uppercase text-3xl">{faker.finance.currencyCode()}</h6>
-            <p className="text-zinc-300">{faker.finance.currencyName()}</p>
-          </div>
-          <p className="text-xs ">+0.02% from last month</p>
-        </div>
-
-        <div className="w-full  border rounded-lg p-3 flex justify-between items-end">
-          <div className="w-5/6">
-            <h6 className=" uppercase text-3xl">{faker.finance.currencyCode()}</h6>
-            <p className="text-zinc-300"> {faker.finance.currencyName()}</p>
-          </div>
-          <p className="text-xs ">+0.02% from last month</p>
-        </div>
-
-        <div className="w-full  border rounded-lg p-3 flex justify-between items-end">
-          <div className="w-5/6">
-            <h6 className=" uppercase text-3xl">{faker.finance.currencyCode()}</h6>
-            <p className="text-zinc-300">{faker.finance.currencyName()}</p>
-          </div>
-          <p className="text-xs ">+0.02% from last month</p>
-        </div>
+        ))}
       </div>
     </div>
   );
