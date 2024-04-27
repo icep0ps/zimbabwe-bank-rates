@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+import { Github, MailIcon, TwitterIcon } from 'lucide-react';
 
 type Props = {};
 
@@ -13,9 +14,23 @@ const Footer = (props: Props) => {
           explore seamless currency conversions.
         </p>
         <div className="flex gap-2">
-          <div className="w-10 h-10 bg-secondary rounded-full"></div>
-          <div className="w-10 h-10 bg-secondary rounded-full"></div>
-          <div className="w-10 h-10 bg-secondary rounded-full"></div>
+          <Link href={'https://twitter.com/icepopsfr'}>
+            <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+              <TwitterIcon />
+            </div>
+          </Link>
+
+          <Link href={'https://github.com/icep0ps/zimbabwe-bank-rates'}>
+            <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+              <Github />
+            </div>
+          </Link>
+
+          <Link href={'mailto:tapsmuko@gmail.com'}>
+            <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+              <MailIcon />
+            </div>
+          </Link>
         </div>
 
         <p className="text-xs text-zinc-400">
@@ -36,7 +51,9 @@ const Footer = (props: Props) => {
 
         <ul className="flex flex-col gap-3">
           <h6 className="font-semibold">Support</h6>
-          <li className="capitalize text-zinc-300 text-sm">Contact</li>
+          <Link href={'mailto:tapsmuko@gmail.com'} target="_blank">
+            <li className="capitalize text-zinc-300 text-sm">Contact</li>
+          </Link>
           <Link href={'https://github.com/icep0ps/zimbabwe-bank-rates'} target="_blank">
             <li className="capitalize text-zinc-300 text-sm">Contribute</li>
           </Link>
