@@ -17,10 +17,11 @@ type Props = {
   };
 
   rates: currency[];
+  setSecondaryAmount: Dispatch<SetStateAction<string>>;
 };
 
 const ConverterModule = (props: Props) => {
-  const { currency, amount, rates } = props;
+  const { currency, amount, rates, setSecondaryAmount } = props;
   const [selectValue, setSelectValue] = useState<string>(currency.value);
   const [recentlyUsedCurrencies, setrecentlyUsedCurrencies] = useState<currency[]>([
     rates[1],
@@ -29,7 +30,9 @@ const ConverterModule = (props: Props) => {
   ]);
 
   const findCurrency = (name: string) =>
-    rates.filter((currency) => currency.currency === name)[0];
+    rates.filter((currency) => currency.currency.trim() === name)[0];
+
+  const primary = findCurrency('USD');
 
   const handleCurrencyChange = (
     event: ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLInputElement, MouseEvent>

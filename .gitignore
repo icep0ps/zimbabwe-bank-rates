@@ -45,3 +45,7 @@ tests/utils/mocks/rates.pdf
 utils/main.js
 tests/mocks/rates.pdf
 utils/extractor/rates.json
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

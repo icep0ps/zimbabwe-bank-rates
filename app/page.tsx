@@ -8,6 +8,7 @@ import Hero from '@/components/hero/hero';
 import Footer from '@/components/footer/footer';
 import { RatesTable } from '@/components/ratesTable/table';
 import Statistics from '@/components/statistics/statistics';
+import { Currencies } from 'currencies-map';
 
 const baseurl =
   process.env.NODE_ENV == 'production'
@@ -23,8 +24,8 @@ const getOfficalRate = async () => {
 
     const rates = await data.json();
     return rates as currency;
-  } catch (error) {
-    throw new Error('Error fetching offical rate: ' + error);
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };
 
@@ -35,8 +36,30 @@ const getRates = async () => {
       cache: 'no-cache',
     });
 
-    const rates = await data.json();
-    return rates as currency[];
+    const rates = (await data.json()) as currency[];
+
+    return rates
+      .map((rate) => {
+        return {
+          ...rate,
+          name:
+            Currencies.names.get(rate.currency.trim()) === undefined
+              ? rate.currency
+              : Currencies.names.get(rate.currency.trim()),
+        };
+      })
+      .sort((a, b) => {
+        if (a.name && b.name) {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1;
+          }
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1;
+          }
+        }
+
+        return 0;
+      });
   } catch (error) {
     throw new Error('Error fetching rates: ' + error);
   }

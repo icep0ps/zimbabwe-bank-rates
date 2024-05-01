@@ -26,12 +26,7 @@ const CurrencyConverter: FC<Props> = (props) => {
 
   const handleConversion = useConversion(props.rate, secondaryCurrency);
 
-  useEffect(() => {
-    convert('primary', secondaryAmount, {
-      primary: props.rate,
-      secondary: secondaryCurrency,
-    });
-  }, [secondaryCurrency.currency]);
+  useEffect(() => {}, [secondaryCurrency.currency]);
 
   return (
     <div className="flex flex-col justify-between items-start w-3/4 gap-5">
@@ -72,6 +67,7 @@ const CurrencyConverter: FC<Props> = (props) => {
             );
           },
         }}
+        setSecondaryAmount={setSecondaryAmount}
         rates={props.rates}
       />
     </div>

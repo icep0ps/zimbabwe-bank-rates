@@ -7,7 +7,7 @@
     "build": "npm --prefix ./services i && next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watchAll"
+    "test": "jest --verbose true"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
@@ -44,6 +44,7 @@
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-typescript": "^7.23.3",
     "@faker-js/faker": "^8.4.1",
+    "@playwright/test": "^1.43.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/jest": "^29.5.11",

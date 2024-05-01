@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Rates = (props: Props) => {
-  const rates = props.data.slice(0, 4);
+  const rates = props.data.slice(1, 5);
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-4 mb-5">

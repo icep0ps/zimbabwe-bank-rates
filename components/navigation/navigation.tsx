@@ -18,7 +18,7 @@ const Navigation = (props: Props) => {
         </li>
 
         <li>
-          <Link href={'/#faq'}>About</Link>
+          <Link href={'/#faq'}>Frequently Asked Questions</Link>
         </li>
       </ul>
     </nav>
