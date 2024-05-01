@@ -1,11 +1,8 @@
 import { FC } from 'react';
 import Rate from './rate';
-import Chart from '../chart/chart';
 import LastUpdated from './lastUpdated';
 import CurrencyConverter from '../converter/converter';
-
 import { currency } from '../../types';
-import { Currencies } from 'currencies-map';
 
 type Props = {
   rate: currency;
@@ -22,10 +19,10 @@ const Hero: FC<Props> = async (props) => {
         <div id="disclamer">
           <LastUpdated date_published={props.rate.date_published} />
           <p className="text-xs gap-2 text-left mt-5 bg-secondary p-3 rounded-2xl">
-            <span className="font-bold">Disclamer:</span> We use the mid-market rate for
-            our bank rate and converter. This is for informational purposes only. These
-            values represent the daily average of the Bid and Ask rates published by The
-            Reserve Bank of Zimbabwe.
+            <span className="font-bold text-red-600 underline">Disclamer:</span> We use
+            the mid-market rate for our bank rate and converter. This is for informational
+            purposes only. These values represent the daily average of the Bid and Ask
+            rates published by The Reserve Bank of Zimbabwe.
           </p>
         </div>
       </div>

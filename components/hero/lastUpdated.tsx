@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from '../chart/chart';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { TrendingDown, TrendingUp } from 'lucide-react';
 
 type Props = {
   date_published: Date;
@@ -25,9 +26,10 @@ const LastUpdated = (props: Props) => {
             <p className="text-xs flex font-bold">
               Rate status: <span className="text-red-600 pl-2"> Outdated</span>
             </p>
-            <p className="text-xs flex ">+0.02% from last month</p>
+            <p className="text-xs flex ">Up by 0.02% from last month</p>
           </div>
-          <ArrowTopRightIcon scale={'400'} />
+          <TrendingUp className="bg-green-600 p-1 rounded-xl" />
+          <TrendingDown className="bg-red-600 p-1 rounded-xl" />
         </div>
       )}
     </div>

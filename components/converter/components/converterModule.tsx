@@ -2,7 +2,6 @@
 
 import { currency } from '../../../types';
 import { Input } from '@/components/ui/input';
-import convert from '@/hooks/convert';
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 type Props = {
@@ -15,7 +14,6 @@ type Props = {
     value: string;
     setAmount: (event: ChangeEvent<HTMLInputElement>) => void;
   };
-
   rates: currency[];
 };
 
@@ -29,7 +27,7 @@ const ConverterModule = (props: Props) => {
   ]);
 
   const findCurrency = (name: string) =>
-    rates.filter((currency) => currency.currency === name)[0];
+    rates.filter((currency) => currency.currency.trim() === name.trim())[0];
 
   const handleCurrencyChange = (
     event: ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLInputElement, MouseEvent>
@@ -73,9 +71,7 @@ const ConverterModule = (props: Props) => {
 
       <select
         id="selected-currenct"
-        onChange={(event) => {
-          handleCurrencyChange(event);
-        }}
+        onChange={handleCurrencyChange}
         value={selectValue}
         className="px-3 py-2 outline-none rounded-lg bg-background border-input border"
       >

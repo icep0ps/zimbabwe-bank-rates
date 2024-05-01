@@ -25,6 +25,7 @@ const convert = (type, amount, { primary, secondary }) => {
   /**
    * Secondary
    */
+
   usd = input / parseFloat(secondary.mid_rate);
   return (usd * parseFloat(primary.mid_zwl)).toFixed(2);
 };

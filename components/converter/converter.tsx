@@ -27,10 +27,12 @@ const CurrencyConverter: FC<Props> = (props) => {
   const handleConversion = useConversion(props.rate, secondaryCurrency);
 
   useEffect(() => {
-    convert('primary', secondaryAmount, {
-      primary: props.rate,
-      secondary: secondaryCurrency,
-    });
+    setSecondaryAmount(
+      convert('primary', primaryAmout, {
+        primary: props.rate,
+        secondary: secondaryCurrency,
+      })
+    );
   }, [secondaryCurrency.currency]);
 
   return (
