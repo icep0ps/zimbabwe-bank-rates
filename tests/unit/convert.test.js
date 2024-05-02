@@ -16,7 +16,7 @@ const primary = {
 describe('convert', () => {
   describe('primary', () => {
     const amount = '13.5616';
-    test('ertertert', () => {
+    test('Argentine pesos should be equal to mid rate', () => {
       const ars = rates[1];
       const result = convert('primary', amount, { primary, secondary: ars });
       expect(result).toBe('862.75');
@@ -25,7 +25,7 @@ describe('convert', () => {
 
   describe('secondary', () => {
     const amount = '862.75';
-    test('22222222222', () => {
+    test('Argentine pesos should convert to ZiG', () => {
       const ars = rates[1];
       const result = convert('secondary', amount, { primary, secondary: ars });
       expect(result).toBe('13.56');
