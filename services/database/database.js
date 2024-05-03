@@ -47,6 +47,22 @@ class Database {
   };
 
   static create = {
+    async waitlist(email) {
+      try {
+        const sql = await Database.connect();
+        const user = await sql`SELECT * FROM waitlist where email=${email}`;
+
+        if (user.count !== 0) {
+          return user[0];
+        } else {
+          await sql`INSERT INTO waitlist (email) VALUES(${email})`;
+          return null;
+        }
+      } catch (error) {
+        throw new Error('Error adding user to waitlist: ' + error);
+      }
+    },
+
     async rates(rates) {
       const ratesArray = [];
       const sql = await Database.connect();
@@ -55,6 +71,7 @@ class Database {
         const currencyName = currency.trim().replace('%2F', '/');
         ratesArray.push({ currency: currencyName, ...rate_values });
       }
+
       return await sql`INSERT INTO rates ${sql(
         ratesArray,
         'currency',
@@ -64,7 +81,9 @@ class Database {
         'bid_zwl',
         'ask_zwl',
         'mid_zwl'
-      )}`;
+      )}`.catch((error) => {
+        throw new Error('Failed to create rates', { cause: error });
+      });
     },
   };
 }

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import 'dotenv/config';
 import https from 'https';
 import puppeteer from 'puppeteer';
 
@@ -6,13 +7,14 @@ process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 class Getpdf {
   static async run() {
+    console.log('Running in: ' + process.env.NODE_ENV + ' mode');
     const url = await Getpdf.navigate();
-    Getpdf.downloadpdf(url);
+    return await Getpdf.downloadpdf(url);
   }
 
   static async navigate() {
     const browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       ignoreHTTPSErrors: true,
       args: ['--disable-features=site-per-process'],
     });
@@ -30,7 +32,7 @@ class Getpdf {
       hrefElement
     );
 
-    console.log('navigating to rates');
+    console.log('navigating to rates: https://www.rbz.co.zw' + html);
     await page.goto('https://www.rbz.co.zw' + html, { waitUntil: 'domcontentloaded' });
 
     const links = [];
@@ -48,15 +50,17 @@ class Getpdf {
     return links[links.length - 1];
   }
 
-  static downloadpdf(url) {
+  static async downloadpdf(url) {
     console.log('downloading pdfs');
-    const file = fs.createWriteStream('utils/extractor/rates.pdf');
-    https.get(url, function (response) {
-      response.pipe(file);
-
-      file.on('finish', () => {
-        file.close();
-        console.log('Download Completed');
+    const file = fs.createWriteStream('./rates/extractor/rates.pdf');
+    return await new Promise((resolve) => {
+      https.get(url, async function (response) {
+        response.pipe(file);
+        file.on('finish', () => {
+          file.close();
+          console.log('Download Completed');
+          resolve();
+        });
       });
     });
   }

@@ -1,34 +1,28 @@
-import fs from 'fs';
 import PDFParser from 'pdf2json';
 import Database from '../../database/database.js';
-import data from './rates.json' assert { type: 'json' };
 
 class Extractor {
-  static read() {
+  static async read() {
     console.log('Extracting from pdf rates');
     const pdfParser = new PDFParser();
 
-    pdfParser.on('pdfParser_dataError', (errData) => console.error(errData.parserError));
-    pdfParser.on('pdfParser_dataReady', (pdfData) => {
-      fs.writeFile(
-        './utils/extractor/rates.json',
-        JSON.stringify(pdfData),
-        async (err) => {
-          if (err) {
-            Extractor.error(err);
-          } else {
-            await Extractor.success();
-          }
-        }
-      );
-    });
+    pdfParser.loadPDF('./rates/extractor/rates.pdf');
 
-    pdfParser.loadPDF('./utils/extractor/rates.pdf');
+    return await new Promise((resolve) => {
+      pdfParser.on('pdfParser_dataError', (errData) =>
+        console.error(errData.parserError)
+      );
+      pdfParser.on('pdfParser_dataReady', async (pdfData) => {
+        const data = JSON.stringify(pdfData);
+        await Extractor.success(data);
+        resolve();
+      });
+    });
   }
 
-  static async success() {
+  static async success(pdfData) {
     console.log('Extracting from pdf rates');
-    const ratesdata = Extractor.genarateRates();
+    const ratesdata = Extractor.genarateRates(JSON.parse(pdfData));
     console.log('creating rates in database');
     await Database.create.rates(ratesdata);
   }
@@ -37,7 +31,7 @@ class Extractor {
     console.log('Error: ' + err);
   }
 
-  static genarateRates() {
+  static genarateRates(data) {
     console.log('Genarating rates');
     const rates = {};
     let groupedRates = [];
@@ -45,23 +39,29 @@ class Extractor {
     const whitespace = new RegExp(/%20/);
     const textNodes = data.Pages[0].Texts.filter((node) => !whitespace.test(node.R.T));
 
-    const ungroupedRates = data.Pages[0].Texts.map((node) => {
-      return Number(node.R[0].T.replace('%2C', ''));
-    }).filter((item) => typeof item === 'number' && !isNaN(item) && item != 0);
-
-    for (let i = 41; i >= 0; i--) {
-      groupedRates.push(ungroupedRates.splice(0, Math.ceil(ungroupedRates.length / i)));
-    }
-
     const filteredCurrencies = textNodes
       .map((node) => {
         if (currency.test(node.R[0].T)) {
-          return node.R[0].T;
+          return node.R[0].T.replace('%2F', ' ');
         }
       })
       .filter((currency) => currency != undefined);
 
     const currencies = filteredCurrencies.slice(7, filteredCurrencies.length);
+
+    const ungroupedRates = data.Pages[0].Texts.map((node) => {
+      return Number(node.R[0].T.replace('%2C', ''));
+    }).filter((item) => typeof item === 'number' && !isNaN(item) && item != 0);
+
+    for (let i = currencies.length; i >= 0; i--) {
+      const rate = ungroupedRates.splice(0, Math.ceil(ungroupedRates.length / i));
+      if (rate.length !== 0) groupedRates.push(rate);
+    }
+
+    if (groupedRates.length !== currencies.length)
+      throw new Error(
+        `Error extracting data from pdf: Number of rates does not match number of currecies got ${currencies.length} currencies and ${groupedRates.length} rates`
+      );
 
     for (let currency = 0; currency < currencies.length; currency++) {
       const rate = groupedRates[currency];
