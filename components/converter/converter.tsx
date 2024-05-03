@@ -1,10 +1,9 @@
 'use client';
 
 import { currency } from '@/types';
+import convert from '@/utils/convert';
 import ConverterModule from './components/converterModule';
 import { FC, useCallback, useEffect, useState } from 'react';
-import useConversion from '@/hooks/useConversion';
-import convert from '@/hooks/convert.js';
 
 type Props = {
   rate: currency;
@@ -23,8 +22,6 @@ const CurrencyConverter: FC<Props> = (props) => {
   const [secondaryAmount, setSecondaryAmount] = useState<string>(
     Number(props.rate.ask).toFixed(2).toString()
   );
-
-  const handleConversion = useConversion(props.rate, secondaryCurrency);
 
   useEffect(() => {
     setSecondaryAmount(
@@ -74,7 +71,7 @@ const CurrencyConverter: FC<Props> = (props) => {
             );
           },
         }}
-        rates={props.rates}
+        rates={props.rates as (currency & { name: string })[]}
       />
     </div>
   );

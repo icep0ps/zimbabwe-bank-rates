@@ -1,5 +1,5 @@
 const rates = require('./rates.json');
-const convert = require('../../hooks/convert');
+const convert = require('../../utils/convert');
 
 const primary = {
   currency: 'USD',
