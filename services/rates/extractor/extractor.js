@@ -3,10 +3,9 @@ import Database from '../../database/database.js';
 
 class Extractor {
   static async read() {
-    console.log('Extracting from pdf rates');
     const pdfParser = new PDFParser();
 
-    pdfParser.loadPDF('./rates/extractor/rates.pdf');
+    pdfParser.loadPDF('./services/rates/extractor/rates.pdf');
 
     return await new Promise((resolve) => {
       pdfParser.on('pdfParser_dataError', (errData) =>

@@ -52,7 +52,7 @@ class Getpdf {
 
   static async downloadpdf(url) {
     console.log('downloading pdfs');
-    const file = fs.createWriteStream('./rates/extractor/rates.pdf');
+    const file = fs.createWriteStream('./services/rates/extractor/rates.pdf');
     return await new Promise((resolve) => {
       https.get(url, async function (response) {
         response.pipe(file);
