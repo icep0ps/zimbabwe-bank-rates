@@ -17,12 +17,16 @@ const Hero: FC<Props> = async (props) => {
           <Rate mid_zwl={props.rate.mid_zwl} />
         </div>
         <div id="disclamer">
-          <LastUpdated date_published={props.rate.date_published} />
+          <LastUpdated
+            date_published={props.rate.date_published}
+            previous_mid_rate_zwl={Number(props.rate.previous_mid_rate_zwl)}
+            previous_date_published={props.rate.previous_date_published}
+          />
           <p className="text-xs gap-2 text-left mt-5 bg-secondary p-3 rounded-2xl">
-            <span className="font-bold text-red-600 underline">Disclamer:</span> We use
-            the mid-market rate for our bank rate and converter. This is for informational
-            purposes only. These values represent the daily average of the Bid and Ask
-            rates published by The Reserve Bank of Zimbabwe.
+            <span className="font-bold ">Disclamer:</span> We use the mid-market rate for
+            our bank rate and converter. This is for informational purposes only. These
+            values represent the daily average of the Bid and Ask rates published by The
+            Reserve Bank of Zimbabwe.
           </p>
         </div>
       </div>

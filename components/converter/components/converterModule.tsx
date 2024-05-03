@@ -14,7 +14,7 @@ type Props = {
     value: string;
     setAmount: (event: ChangeEvent<HTMLInputElement>) => void;
   };
-  rates: currency[];
+  rates: (currency & { name: string })[];
 };
 
 const ConverterModule = (props: Props) => {

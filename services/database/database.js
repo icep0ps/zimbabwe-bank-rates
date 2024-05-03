@@ -32,16 +32,11 @@ class Database {
 
     async offical(currency) {
       const sql = await Database.connect();
-      const res =
-        await sql`SELECT * FROM rates WHERE date_published = CURRENT_DATE AND currency=${currency}`;
+      let res =
+        await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date order by date_published limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
 
-      if (res.count === 0) {
-        const res = await sql`SELECT * FROM rates WHERE currency=${currency}`;
-        const lastRate = res.pop();
-        if (lastRate) {
-          return [lastRate];
-        }
-      }
+      if (res.count === 0)
+        res = await sql`SELECT * FROM rates WHERE currency=${currency} LIMIT 1`;
       return res;
     },
   };
