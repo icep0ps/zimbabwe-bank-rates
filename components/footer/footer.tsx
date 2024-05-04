@@ -6,10 +6,10 @@ type Props = {};
 
 const Footer = (props: Props) => {
   return (
-    <footer className="flex justify-between w-full mt-10 py-10">
-      <div className="flex flex-col justify-between w-2/4 gap-3">
+    <footer className="flex justify-between w-full mt-10 py-10 gap-5 flex-wrap">
+      <div className="flex flex-col justify-between lg:w-2/4 w-full gap-3 min-w-60">
         <h1 className="text-xl">Zimbabwe bank rates</h1>
-        <p className="text-sm">
+        <p className="text-sm ">
           An open source platform to stay updated with real-time ZWL bank rates and
           explore seamless currency conversions.
         </p>
@@ -38,8 +38,8 @@ const Footer = (props: Props) => {
         </p>
       </div>
 
-      <div className="flex gap-5">
-        <ul className="flex flex-col gap-3">
+      <div className="flex gap-5 max-lg:justify-between max-lg:w-full ">
+        <ul className="flex flex-col gap-3 w-1/2">
           <h6 className="font-semibold">Home</h6>
           <Link href={'/'}>
             <li className="capitalize text-zinc-300 text-sm">Today's rate</li>
@@ -49,7 +49,7 @@ const Footer = (props: Props) => {
           </Link>
         </ul>
 
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-3 max-sm:w-1/2">
           <h6 className="font-semibold">Support</h6>
           <Link href={'mailto:tapsmuko@gmail.com'} target="_blank">
             <li className="capitalize text-zinc-300 text-sm">Contact</li>
