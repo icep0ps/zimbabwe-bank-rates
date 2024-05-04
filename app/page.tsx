@@ -10,10 +10,15 @@ import { RatesTable } from '@/components/ratesTable/table';
 import Statistics from '@/components/statistics/statistics';
 import { Currencies } from 'currencies-map';
 
-const baseurl =
-  process.env.NODE_ENV == 'production'
-    ? process.env.NEXT_PUBLIC_VERCEL_URL
-    : process.env.NEXT_PUBLIC_DEV_URL;
+let baseurl = `http://${process.env.NEXT_PUBLIC_DEV_URL}`;
+
+if (process.env.VERCEL_ENV === 'preview') baseurl = `https://${process.env.VERCEL_URL}`;
+
+if (process.env.VERCEL_ENV === 'development')
+  baseurl = `http://${process.env.NEXT_PUBLIC_DEV_URL}`;
+
+if (process.env.VERCEL_ENV === 'production')
+  baseurl = `https://${process.env.NEXT_PUBLIC_DEV_URL}`;
 
 const getOfficalRate = async () => {
   try {
