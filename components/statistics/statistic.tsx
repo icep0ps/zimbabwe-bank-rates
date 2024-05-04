@@ -14,7 +14,7 @@ const Statistic = (props: Props) => {
         {parseFloat(props.value.toString()).toFixed(2)}{' '}
         {props.currency ? props.currency : 'USD'}
       </p>
-      <p className="text-xs text-zinc-300">+19% from last month</p>
+      <p className="text-xs text-zinc-300"></p>
     </div>
   );
 };

@@ -36,19 +36,21 @@ const Rates = (props: Props) => {
               1 ZiG: {parseFloat(rate.mid_zwl.toString()).toFixed(3)}
             </p>
 
-            <div className="flex justify-between items-center w-full">
-              <p className="text-xs flex ">
-                {rate.previous_mid_rate_zwl < 0
-                  ? `Down by ${rate.previous_mid_rate_zwl} ZiG `
-                  : `Up by ${rate.previous_mid_rate_zwl} ZiG `}
-              </p>
+            {parseFloat(rate.previous_mid_rate_zwl.toString()) !== 0 && (
+              <div className="flex justify-between items-center w-full">
+                <p className="text-xs flex ">
+                  {rate.previous_mid_rate_zwl < 0
+                    ? `Down by ${rate.previous_mid_rate_zwl} ZiG `
+                    : `Up by ${rate.previous_mid_rate_zwl} ZiG `}
+                </p>
 
-              {rate.previous_mid_rate_zwl < 0 ? (
-                <TrendingDown className="bg-red-600 p-1 rounded-xl" />
-              ) : (
-                <TrendingUp className="bg-green-600 p-1 rounded-xl" />
-              )}
-            </div>
+                {rate.previous_mid_rate_zwl < 0 ? (
+                  <TrendingDown className="bg-red-600 p-1 rounded-xl" />
+                ) : (
+                  <TrendingUp className="bg-green-600 p-1 rounded-xl" />
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>
