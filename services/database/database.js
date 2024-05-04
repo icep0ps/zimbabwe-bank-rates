@@ -20,7 +20,8 @@ class Database {
   static get = {
     async rates() {
       const sql = await Database.connect();
-      const res = await sql`SELECT * FROM rates WHERE date_published =  CURRENT_DATE `;
+      const res =
+        await sql`select *, mid_zwl - (select mid_zwl from rates where currency = r.currency and date_published < CURRENT_DATE order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where currency = r.currency and date_published < CURRENT_DATE order by date_published desc limit 1) as previous_date_published from rates r where date_published = CURRENT_DATE`;
 
       if (res.count === 0) {
         const lastUpatedCurrencies =
