@@ -1,5 +1,4 @@
 import React from 'react';
-import { faker } from '@faker-js/faker';
 
 type Props = {
   name: string;

@@ -9,7 +9,7 @@ type Props = {
 const Statistics = (props: Props) => {
   return (
     <div className="p-5 border rounded-3xl ">
-      <h1 className="text-xl mb font-bold">Currency statistics</h1>
+      <h1 className="text-xl mb font-bold">Statistics</h1>
       <p className="text-xs font-normal">
         United states dollar (USD) statistics against Zimbabwe gold (ZiG).
       </p>
