@@ -33,10 +33,10 @@ const CurrencyConverter: FC<Props> = (props) => {
   }, [secondaryCurrency.currency]);
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex flex-col gap-5 pr-5 w-1/2">
+    <div className="flex justify-between items-center flex-wrap max-lg:justify-center">
+      <div className="flex flex-col gap-5 pr-5 w-1/2 max-lg:w-full max-lg:mb-10">
         <h1 className="text-3xl font-bold text-primary">Exchange rate calculator</h1>
-        <p>
+        <p className="max-lg:text-sm">
           Users are accountable for any misuse of this exchange rate calculator. It's for
           informational purposes only and should not be used for activities against
           Zimbabwean law.

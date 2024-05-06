@@ -19,7 +19,7 @@ const Statistics = (props: Props) => {
           <Statistic name="Ask" value={props.data.ask} />
           <Statistic name="Mid" value={props.data.mid_rate} />
           <Statistic name="Bid (ZiG)" value={props.data.bid_zwl} currency="ZiG" />
-          <Statistic name="Ask (ZiG)" value={props.data.ask_zwl} currency="ZiG" />
+          <Statistic name="Ask (ZiG)" value={props.data.ask_zwl} currency="ZiG" border />
         </div>
       ) : (
         <h1>No offical rate found</h1>

@@ -31,11 +31,13 @@ const LastUpdated = (props: Props) => {
 
   return (
     <div className="w-full h-full flex flex-col gap-3">
-      <p className="font-bold text-xs text-left">Last updated · {rateDate}</p>
+      <p className="font-bold text-xs text-left max-sm:text-center">
+        Last updated · {rateDate}
+      </p>
 
-      <div className="flex items-center gap-3">
-        <div>
-          <p className="text-xs flex font-bold">
+      <div className="flex items-center max-sm:justify-center gap-3">
+        <div className="max-sm:flex max-sm:flex-col max-sm:gap-1 max-sm:items-center">
+          <p className="text-xs flex font-bold ">
             Rate status:{' '}
             {today === rateDate ? (
               <span className="text-green-600 pl-2"> Up-to Date</span>

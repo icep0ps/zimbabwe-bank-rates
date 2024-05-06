@@ -49,7 +49,7 @@ const Footer = (props: Props) => {
           </Link>
         </ul>
 
-        <ul className="flex flex-col gap-3 max-sm:w-1/2">
+        <ul className="flex flex-col gap-3 max-sm:w-1/2 text-right">
           <h6 className="font-semibold">Support</h6>
           <Link href={'mailto:tapsmuko@gmail.com'} target="_blank">
             <li className="capitalize text-zinc-300 text-sm">Contact</li>

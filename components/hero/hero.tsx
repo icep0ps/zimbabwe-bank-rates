@@ -17,7 +17,26 @@ const Hero: FC<Props> = async (props) => {
 
   return (
     <section className="flex w-full relative h-full justify-between items-center py-5 flex-wrap ">
-      <div className=" flex flex-col items-start text-center gap-5 h-fit w-1/2 ">
+      <div className="w-full mb-10 lg:hidden">
+        <div className="flex flex-col gap-5">
+          <h1 className="text-3xl font-bold text-primary">Offical Bank Rate</h1>
+          <p className="text-sm">
+            The official bank rate for{' '}
+            <span className="font-bold text-primary">{rateDate}</span>, using the mid-rate
+            is now set. For precise details, visit the{' '}
+            <a
+              href="https://www.rbz.co.zw/index.php/research/markets/exchange-rates"
+              className="underline"
+              target="_blank"
+            >
+              Reserve Bank of Zimbabwe's official website (RBZ)
+            </a>
+            .
+          </p>
+        </div>
+      </div>
+
+      <div className=" flex flex-col items-start text-center gap-5 h-fit w-1/2 max-lg:w-full">
         <div className="flex w-full justify-between">
           <Rate mid_zwl={props.rate.mid_zwl} />
         </div>
@@ -36,21 +55,19 @@ const Hero: FC<Props> = async (props) => {
         </div>
       </div>
 
-      <div className="w-1/2 pl-10">
+      <div className="w-1/2 pl-10 max-lg:hidden">
         <div className="flex flex-col gap-5">
           <h1 className="text-3xl font-bold text-primary">Offical Bank Rate</h1>
           <p>
-            This is to inform you that the official bank rate for{' '}
-            <span className="font-bold text-primary">{rateDate}</span>, has been
-            established using the mid-rate. Please note that this information is provided
-            solely for informational purposes. For more detailed and accurate information,
-            kindly visit the official website of the{' '}
+            The official bank rate for{' '}
+            <span className="font-bold text-primary">{rateDate}</span>, using the mid-rate
+            is now set. For precise details, visit the{' '}
             <a
               href="https://www.rbz.co.zw/index.php/research/markets/exchange-rates"
               className="underline"
               target="_blank"
             >
-              Reserve Bank of Zimbabwe (RBZ)
+              Reserve Bank of Zimbabwe's official website (RBZ)
             </a>
             .
           </p>

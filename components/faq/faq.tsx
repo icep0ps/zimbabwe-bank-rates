@@ -5,8 +5,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../ui/accordion';
+import { currency } from '@/types';
 
-type Props = {};
+type Props = {
+  rates: currency[];
+};
 
 const Faq = (props: Props) => {
   return (
