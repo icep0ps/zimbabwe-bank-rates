@@ -23,26 +23,30 @@ if (process.env.VERCEL_ENV === 'production')
 
 const getOfficalRate = async () => {
   try {
-    const data = await fetch(`${baseurl}/api/rates/offical`, {
+    const response = await fetch(`${baseurl}/api/rates/offical`, {
       method: 'GET',
       cache: 'no-cache',
     });
 
-    const rates = await data.json();
-    return rates as currency;
+    if (!response.ok) throw new Error(response.statusText);
+
+    const rate = await response.json().then((json) => json.data as currency);
+    return rate;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw new Error('Error fetching offical rate: ' + error.message);
   }
 };
 
 const getRates = async () => {
   try {
-    const data = await fetch(`${baseurl}/api/rates`, {
+    const response = await fetch(`${baseurl}/api/rates`, {
       method: 'GET',
       cache: 'no-cache',
     });
 
-    const rates = (await data.json()) as currency[];
+    if (!response.ok) throw new Error(response.statusText);
+
+    const rates = await response.json().then((json) => json.data as currency[]);
 
     return rates
       .map((rate) => {
@@ -72,28 +76,18 @@ const getRates = async () => {
 };
 
 export default async function Home() {
-  const rate = await getOfficalRate().catch((error) => {
-    console.log('Error occured getting offical rate in component:' + error.message);
-    return null;
-  });
-  const rates = await getRates().catch((error) => {
-    console.log('Error occured getting rates in component:' + error.message);
-    return null;
-  });
+  const rate = await getOfficalRate();
+  const rates = await getRates();
 
-  if (rates?.length && rate) {
-    return (
-      <>
-        <Hero rate={rate} />
-        <CurrencyConverter rate={rate} rates={rates} />
-        <Statistics data={rate} />
-        <Rates data={rates} />
-        <RatesTable data={rates} />
-        <Faq rates={rates} />
-        <Footer />
-      </>
-    );
-  }
-
-  return <h1>No Rates Found</h1>;
+  return (
+    <>
+      <Hero rate={rate} />
+      <CurrencyConverter rate={rate} rates={rates} />
+      <Statistics data={rate} />
+      <Rates data={rates} />
+      <RatesTable data={rates} />
+      <Faq rates={rates} />
+      <Footer />
+    </>
+  );
 }
