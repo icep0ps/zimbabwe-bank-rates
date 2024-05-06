@@ -23,7 +23,7 @@ const Rates = (props: Props) => {
         </p>
       </div>
 
-      <div className="flex gap-5 flex-wrap">
+      <div className="flex gap-5 max-sm:flex-wrap">
         {rates.map((rate) => (
           <div className="w-full p-3 border rounded-lg  flex flex-col justify-between items-start relative ">
             <div className="w-5/6">
