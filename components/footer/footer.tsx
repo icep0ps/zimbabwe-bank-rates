@@ -7,13 +7,13 @@ type Props = {};
 const Footer = (props: Props) => {
   return (
     <footer className="flex justify-between w-full mt-10 py-10 gap-5 flex-wrap">
-      <div className="flex flex-col justify-between lg:w-2/4 w-full gap-3 min-w-60">
+      <div className="flex flex-col justify-between lg:w-2/4 w-full gap-3 min-w-60 max-sm:items-center">
         <h1 className="text-xl">Zimbabwe bank rates</h1>
         <p className="text-sm ">
           An open source platform to stay updated with real-time ZWL bank rates and
           explore seamless currency conversions.
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <Link href={'https://twitter.com/icepopsfr'}>
             <div className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
               <TwitterIcon />

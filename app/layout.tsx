@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex flex-col min-h-screen items-start justify-start gap-10 p-5 relative ">
           <Navigation />
           <section className="flex flex-col w-full relative gap-10">{children}</section>
-          {/* <Footer /> */}
         </main>
       </body>
     </html>

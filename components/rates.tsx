@@ -36,7 +36,7 @@ const Rates = (props: Props) => {
               1 ZiG: {parseFloat(rate.mid_zwl.toString()).toFixed(3)}
             </p>
 
-            {parseFloat(rate.previous_mid_rate_zwl.toString()) !== 0 && (
+            {parseFloat(rate.previous_mid_rate_zwl?.toString()) !== 0 && (
               <div className="flex justify-between items-center w-full">
                 <p className="text-xs flex ">
                   {rate.previous_mid_rate_zwl < 0

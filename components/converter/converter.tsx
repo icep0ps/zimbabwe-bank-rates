@@ -33,46 +33,57 @@ const CurrencyConverter: FC<Props> = (props) => {
   }, [secondaryCurrency.currency]);
 
   return (
-    <div className="flex flex-col justify-between items-start w-3/4 gap-5">
-      <span className="w-full focus-within:border-accent border rounded-lg py-3 px-2 flex">
-        <span className="bg-border p-2 rounded-lg text-sm mr-3">ZiG</span>
-        <input
-          min={'0'}
-          type="number"
-          id="currency"
-          value={primaryAmout}
-          className="bg-background outline-none"
-          onChange={(event) => {
-            setPriamaryAmount(parseFloat(event.target.value).toString());
-            setSecondaryAmount(
-              convert('primary', event.target.value, {
-                primary: props.rate,
-                secondary: secondaryCurrency,
-              })
-            );
-          }}
-        />
-      </span>
+    <div className="flex justify-between items-center">
+      <div className="flex flex-col gap-5 pr-5 w-1/2">
+        <h1 className="text-3xl font-bold text-primary">Exchange rate calculator</h1>
+        <p>
+          Users are accountable for any misuse of this exchange rate calculator. It's for
+          informational purposes only and should not be used for activities against
+          Zimbabwean law.
+        </p>
+      </div>
 
-      <ConverterModule
-        currency={{
-          value: secondaryCurrency.currency,
-          setCurrency: setSecondaryCurrency,
-        }}
-        amount={{
-          value: secondaryAmount,
-          setAmount: (event) => {
-            setSecondaryAmount(event.target.value);
-            setPriamaryAmount(
-              convert('secondary', event.target.value, {
-                primary: props.rate,
-                secondary: secondaryCurrency,
-              })
-            );
-          },
-        }}
-        rates={props.rates as (currency & { name: string })[]}
-      />
+      <div className="flex flex-col justify-between items-start gap-5 max-w-96 ">
+        <span className="w-full focus-within:border-accent border rounded-lg py-3 px-2 flex ">
+          <span className="bg-border p-2 rounded-lg text-sm mr-3">ZiG</span>
+          <input
+            min={'0'}
+            type="number"
+            id="currency"
+            value={primaryAmout}
+            className="bg-background outline-none "
+            onChange={(event) => {
+              setPriamaryAmount(parseFloat(event.target.value).toString());
+              setSecondaryAmount(
+                convert('primary', event.target.value, {
+                  primary: props.rate,
+                  secondary: secondaryCurrency,
+                })
+              );
+            }}
+          />
+        </span>
+
+        <ConverterModule
+          currency={{
+            value: secondaryCurrency.currency,
+            setCurrency: setSecondaryCurrency,
+          }}
+          amount={{
+            value: secondaryAmount,
+            setAmount: (event) => {
+              setSecondaryAmount(event.target.value);
+              setPriamaryAmount(
+                convert('secondary', event.target.value, {
+                  primary: props.rate,
+                  secondary: secondaryCurrency,
+                })
+              );
+            },
+          }}
+          rates={props.rates as (currency & { name: string })[]}
+        />
+      </div>
     </div>
   );
 };

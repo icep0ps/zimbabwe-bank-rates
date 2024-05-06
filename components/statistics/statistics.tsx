@@ -14,7 +14,7 @@ const Statistics = (props: Props) => {
         United states dollar (USD) statistics against Zimbabwe gold (ZiG).
       </p>
       {props.data ? (
-        <div className="flex justify-between  py-10">
+        <div className="flex justify-between py-10 flex-wrap gap-5">
           <Statistic name="Bid" value={props.data.bid} />
           <Statistic name="Ask" value={props.data.ask} />
           <Statistic name="Mid" value={props.data.mid_rate} />

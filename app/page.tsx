@@ -9,6 +9,7 @@ import Footer from '@/components/footer/footer';
 import { RatesTable } from '@/components/ratesTable/table';
 import Statistics from '@/components/statistics/statistics';
 import { Currencies } from 'currencies-map';
+import CurrencyConverter from '@/components/converter/converter';
 
 let baseurl = `http://${process.env.NEXT_PUBLIC_DEV_URL}`;
 
@@ -80,14 +81,15 @@ export default async function Home() {
     return null;
   });
 
-  if (rates?.length) {
+  if (rates?.length && rate) {
     return (
       <>
-        {rate ? <Hero rate={rate} rates={rates} /> : <h1>No Offical rate found</h1>}
+        <Hero rate={rate} />
+        <CurrencyConverter rate={rate} rates={rates} />
         <Statistics data={rate} />
         <Rates data={rates} />
         <RatesTable data={rates} />
-        <Faq />
+        <Faq rates={rates} />
         <Footer />
       </>
     );

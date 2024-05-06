@@ -4,7 +4,7 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
 type Props = {
-  date_published: Date;
+  date_published: String;
   previous_date_published: Date;
   previous_mid_rate_zwl: number;
 };
@@ -17,12 +17,7 @@ const LastUpdated = (props: Props) => {
     day: 'numeric',
   });
 
-  const rateDate = new Date(props.date_published).toLocaleDateString('en-us', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const rateDate = props.date_published;
 
   const previousRateDate = new Date(props.previous_date_published).toLocaleDateString(
     'en-us',

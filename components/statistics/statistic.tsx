@@ -8,7 +8,7 @@ type Props = {
 
 const Statistic = (props: Props) => {
   return (
-    <div className=" pl-0 pr-5 border-r">
+    <div className=" pl-0 pr-5 lg:border-r">
       <h6 className="text-zinc-300 uppercase">{props.name}</h6>
       <p className="text-2xl ">
         {parseFloat(props.value.toString()).toFixed(2)}{' '}
