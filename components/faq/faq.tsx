@@ -14,10 +14,10 @@ type Props = {
 const Faq = (props: Props) => {
   return (
     <section className="flex flex-col gap-5" id="faq">
-      <h1 className="capitalize text-3xl font-bold text-primary">
+      <h1 className="capitalize text-3xl font-bold text-primary max-sm:text-center">
         frequently asked questions
       </h1>
-      <p>
+      <p className="max-sm:text-center">
         Quick answers to questions you might have. Can't find what you are looking for?
         Contact us
       </p>

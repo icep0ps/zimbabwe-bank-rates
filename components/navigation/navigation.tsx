@@ -21,14 +21,11 @@ const Navigation = (props: Props) => {
         </Link>
 
         <ul className="flex gap-5  items-center max-lg:hidden">
-          <li className="border-b-4 border-accent">
-            <Link href={'/#exchange_rates'}>Home</Link>
-          </li>
-          <li>
+          <li className="border-b-2 border-accent">
             <Link href={'/#exchange_rates'}>Exchange rates</Link>
           </li>
 
-          <li>
+          <li className="border-b-2 border-accent">
             <Link href={'/#faq'}>Frequently Asked Questions</Link>
           </li>
         </ul>

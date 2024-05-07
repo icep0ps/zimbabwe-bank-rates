@@ -74,10 +74,13 @@ export function RatesTable(props: Props) {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <h1 className="text-3xl font-bold text-primary" id="exchange_rates">
+      <h1
+        className="text-3xl font-bold text-primary max-sm:text-center"
+        id="exchange_rates "
+      >
         All exchange rates
       </h1>
-      <p className={'text-sx'}>
+      <p className={'text-sx max-sm:text-center'}>
         Our tables are meticulously updated with the latest information posted by the
         Reserve Bank of Zimbabwe, ensuring you have access to reliable and up-to-date
         data.

@@ -6,7 +6,7 @@ type Props = {
 
 const Rate = (props: Props) => {
   return (
-    <div className="flex gap-3 flex-col items-start justify-center">
+    <div className="flex gap-2 flex-col items-start justify-center">
       <p className="text-base text-zinc-300 text-left max-lg:text-center">
         Offical bank rate for 1 United States Dollar equals
       </p>

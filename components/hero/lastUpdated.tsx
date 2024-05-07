@@ -30,12 +30,12 @@ const LastUpdated = (props: Props) => {
   );
 
   return (
-    <div className="w-full h-full flex flex-col gap-3">
+    <div className="w-full h-full flex flex-col gap-2">
       <p className="font-bold text-xs text-left max-sm:text-center">
         Last updated · {rateDate}
       </p>
 
-      <div className="flex items-center max-sm:justify-center gap-3">
+      <div className="flex items-center max-sm:justify-center gap-3 flex-wrap">
         <div className="max-sm:flex max-sm:flex-col max-sm:gap-1 max-sm:items-center">
           <p className="text-xs flex font-bold ">
             Rate status:{' '}

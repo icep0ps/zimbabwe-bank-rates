@@ -16,11 +16,13 @@ const Hero: FC<Props> = async (props) => {
   });
 
   return (
-    <section className="flex w-full relative h-full justify-between items-center py-5 flex-wrap ">
+    <section className="flex w-full relative h-full justify-between items-center py-5 flex-wrap">
       <div className="w-full mb-10 lg:hidden">
         <div className="flex flex-col gap-5">
-          <h1 className="text-3xl font-bold text-primary">Offical Bank Rate</h1>
-          <p className="text-sm">
+          <h1 className="text-3xl font-bold text-primary text-center">
+            Offical Bank Rate
+          </h1>
+          <p className="text-sm text-center">
             The official bank rate for{' '}
             <span className="font-bold text-primary">{rateDate}</span>, using the mid-rate
             is now set. For precise details, visit the{' '}
