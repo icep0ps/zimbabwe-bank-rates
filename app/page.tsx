@@ -1,7 +1,5 @@
 'use server';
 
-import { currency } from '@/types';
-
 import Rates from '@/components/rates';
 import Faq from '@/components/faq/faq';
 import Hero from '@/components/hero/hero';
@@ -10,69 +8,46 @@ import { RatesTable } from '@/components/ratesTable/table';
 import Statistics from '@/components/statistics/statistics';
 import { Currencies } from 'currencies-map';
 import CurrencyConverter from '@/components/converter/converter';
-
-let baseurl = `http://${process.env.NEXT_PUBLIC_DEV_URL}`;
-
-if (process.env.VERCEL_ENV === 'preview') baseurl = `https://${process.env.VERCEL_URL}`;
-
-if (process.env.VERCEL_ENV === 'development')
-  baseurl = `http://${process.env.NEXT_PUBLIC_DEV_URL}`;
-
-if (process.env.VERCEL_ENV === 'production')
-  baseurl = `https://${process.env.NEXT_PUBLIC_DEV_URL}`;
+import Database from '@/services/database/database';
+import { currency } from '@/types';
 
 const getOfficalRate = async () => {
-  try {
-    const response = await fetch(`${baseurl}/api/rates/offical`, {
-      method: 'GET',
-      cache: 'no-cache',
-    });
+  const rates = await Database.get.offical('USD').catch((error) => {
+    throw new Error(error.message);
+  });
 
-    if (!response.ok) throw new Error(response.statusText);
+  if (rates[0] === undefined) throw new Error('Could not find offical rate');
 
-    const rate = await response.json().then((json) => json.data as currency);
-    return rate;
-  } catch (error: any) {
-    throw new Error('Error fetching offical rate: ' + error.message);
-  }
+  return rates[0] as currency;
 };
 
 const getRates = async () => {
-  try {
-    const response = await fetch(`${baseurl}/api/rates`, {
-      method: 'GET',
-      cache: 'no-cache',
-    });
+  const rates = await Database.get.rates().catch((error) => {
+    throw new Error(error.message);
+  });
 
-    if (!response.ok) throw new Error(response.statusText);
-
-    const rates = await response.json().then((json) => json.data as currency[]);
-
-    return rates
-      .map((rate) => {
-        return {
-          ...rate,
-          name:
-            Currencies.names.get(rate.currency.trim()) === undefined
-              ? rate.currency
-              : Currencies.names.get(rate.currency.trim()),
-        };
-      })
-      .sort((a, b) => {
-        if (a.name && b.name) {
-          if (a.name.toLowerCase() < b.name.toLowerCase()) {
-            return -1;
-          }
-          if (a.name.toLowerCase() > b.name.toLowerCase()) {
-            return 1;
-          }
+  return rates
+    .map((rate) => {
+      return {
+        ...rate,
+        name:
+          Currencies.names.get(rate.currency.trim()) === undefined
+            ? rate.currency
+            : Currencies.names.get(rate.currency.trim()),
+      };
+    })
+    .sort((a, b) => {
+      if (a.name && b.name) {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
+          return -1;
         }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          return 1;
+        }
+      }
 
-        return 0;
-      });
-  } catch (error) {
-    throw new Error('Error fetching rates: ' + error);
-  }
+      return 0;
+    }) as currency[];
 };
 
 export default async function Home() {
@@ -80,7 +55,7 @@ export default async function Home() {
   const rates = await getRates();
 
   return (
-    <>
+    <section className="flex flex-col w-full relative gap-10 p-5">
       <Hero rate={rate} />
       <CurrencyConverter rate={rate} rates={rates} />
       <Statistics data={rate} />
@@ -88,6 +63,6 @@ export default async function Home() {
       <RatesTable data={rates} />
       <Faq rates={rates} />
       <Footer />
-    </>
+    </section>
   );
 }

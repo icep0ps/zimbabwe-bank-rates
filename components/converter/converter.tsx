@@ -3,7 +3,7 @@
 import { currency } from '@/types';
 import convert from '@/utils/convert';
 import ConverterModule from './components/converterModule';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 type Props = {
   rate: currency;

@@ -9,4 +9,5 @@ export type currency = {
   date_published: Date;
   previous_date_published: Date;
   previous_mid_rate_zwl: number;
+  name: string;
 };
