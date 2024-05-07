@@ -64,7 +64,7 @@ const ConverterModule = (props: Props) => {
           id="amount"
           type="number"
           value={amount.value}
-          className="  bg-background outline-none"
+          className="w-full  bg-background outline-none"
           onChange={amount.setAmount}
         />
       </span>
@@ -86,7 +86,7 @@ const ConverterModule = (props: Props) => {
         ))}
       </select>
 
-      <div className="flex gap-2" id="recently-selected">
+      <div className="flex gap-2 w-full " id="recently-selected">
         {recentlyUsedCurrencies.map((currency) => {
           return (
             <Input

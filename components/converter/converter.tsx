@@ -33,17 +33,18 @@ const CurrencyConverter: FC<Props> = (props) => {
   }, [secondaryCurrency.currency]);
 
   return (
-    <div className="flex justify-between items-center flex-wrap max-lg:justify-center">
+    <div className="flex justify-between items-center flex-wrap max-lg:justify-center relative">
       <div className="flex flex-col gap-5 pr-5 w-1/2 max-lg:w-full max-lg:mb-10">
-        <h1 className="text-3xl font-bold text-primary">Exchange rate calculator</h1>
-        <p className="max-lg:text-sm">
+        <h1 className="text-3xl font-bold text-primary max-sm:text-center">
+          Exchange rate calculator
+        </h1>
+        <p className="max-lg:text-sm max-sm:text-center">
           Users are accountable for any misuse of this exchange rate calculator. It's for
-          informational purposes only and should not be used for activities against
-          Zimbabwean law.
+          informational purposes only.
         </p>
       </div>
 
-      <div className="flex flex-col justify-between items-start gap-5 max-w-96 ">
+      <div className="flex flex-col justify-between items-start gap-5 max-w-96 w-full">
         <span className="w-full focus-within:border-accent border rounded-lg py-3 px-2 flex ">
           <span className="bg-border p-2 rounded-lg text-sm mr-3">ZiG</span>
           <input
@@ -51,7 +52,7 @@ const CurrencyConverter: FC<Props> = (props) => {
             type="number"
             id="currency"
             value={primaryAmout}
-            className="bg-background outline-none "
+            className="bg-background outline-none w-full"
             onChange={(event) => {
               setPriamaryAmount(parseFloat(event.target.value).toString());
               setSecondaryAmount(
