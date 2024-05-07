@@ -79,8 +79,8 @@ export function RatesTable(props: Props) {
       </h1>
       <p className={'text-sx'}>
         Our tables are meticulously updated with the latest information posted by the
-        Reserve Bank of Zimbabwe, ensuring you have access to reliable and
-        up-to-the-minute data.
+        Reserve Bank of Zimbabwe, ensuring you have access to reliable and up-to-date
+        data.
       </p>
       <div className="flex items-center py-4">
         <Input

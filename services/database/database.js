@@ -26,7 +26,7 @@ class Database {
 
         if (res.count === 0) {
           const lastUpatedCurrencies =
-            await sql`SELECT * FROM rates ORDER BY date_published ASC LIMIT 41`;
+            await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_date_published from rates where date_published = (select max(date_published) from rates);`;
           return lastUpatedCurrencies;
         }
         return res;
@@ -39,10 +39,11 @@ class Database {
       try {
         const sql = await Database.connect();
         let res =
-          await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date order by date_published limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
+          await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published desc limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
 
         if (res.count === 0)
-          res = await sql`SELECT * FROM rates WHERE currency=${currency} LIMIT 1`;
+          res =
+            await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_date_published from rates where date_published = (select max(date_published) from rates) and currency = ${currency};`;
         return res;
       } catch (error) {
         throw new Error('Error getting offical rate in database: ' + error.message);
