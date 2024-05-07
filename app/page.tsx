@@ -58,7 +58,6 @@ export default async function Home() {
     <section className="flex flex-col w-full relative gap-10 p-5">
       <Hero rate={rate} />
       <CurrencyConverter rate={rate} rates={rates} />
-      <Statistics data={rate} />
       <Rates data={rates} />
       <RatesTable data={rates} />
       <Faq rates={rates} />
