@@ -16,6 +16,7 @@ env:
 
 jobs:
   Get-bank-rates:
+    environment: production
     runs-on: ubuntu-latest
     defaults:
       run:
