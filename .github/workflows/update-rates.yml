@@ -31,6 +31,7 @@ jobs:
 
   Deploy-Preview:
     needs: [Get-bank-rates]
+    environment: production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
