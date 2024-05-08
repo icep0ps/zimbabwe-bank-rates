@@ -33,7 +33,13 @@ const Faq = (props: Props) => {
         <AccordionItem value="item-2">
           <AccordionTrigger>What currencies do we support?</AccordionTrigger>
           <AccordionContent>
-            All currencies listed in The Reserve Bank of Zimbabwe exchange rate PDF.
+            <ul className="list-disc flex flex-wrap w-full gap-4 justify-between text-nowrap ml-5">
+              {props.rates.map((rate) => (
+                <li className="w-48">
+                  {rate.name} ({rate.currency})
+                </li>
+              ))}
+            </ul>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
