@@ -40,7 +40,7 @@ const LastUpdated = (props: Props) => {
           <p className="text-xs flex font-bold ">
             Rate status:{' '}
             {today === rateDate ? (
-              <span className="text-green-600 pl-2"> Up-to Date</span>
+              <span className="text-green-600 pl-2"> Up-to-Date</span>
             ) : (
               <span className="text-red-600 pl-2"> Outdated</span>
             )}

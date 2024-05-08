@@ -35,7 +35,7 @@ const Faq = (props: Props) => {
           <AccordionContent>
             <ul className="list-disc flex flex-wrap w-full gap-4 justify-between text-nowrap ml-5">
               {props.rates.map((rate) => (
-                <li className="w-48">
+                <li className="w-48" key={rate.currency}>
                   {rate.name} ({rate.currency})
                 </li>
               ))}
