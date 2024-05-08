@@ -20,12 +20,12 @@ const Navigation = (props: Props) => {
           Zimbabwe bank rates
         </Link>
 
-        <ul className="flex gap-5  items-center max-lg:hidden">
-          <li className="border-b-2 border-accent">
+        <ul className="flex gap-5  items-center max-lg:hidden ">
+          <li className="hover:border-b-2 border-accent">
             <Link href={'/#exchange_rates'}>Exchange rates</Link>
           </li>
 
-          <li className="border-b-2 border-accent">
+          <li className="hover:border-b-2 border-accent">
             <Link href={'/#faq'}>Frequently Asked Questions</Link>
           </li>
         </ul>

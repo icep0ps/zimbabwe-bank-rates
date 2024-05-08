@@ -5,7 +5,6 @@ import Faq from '@/components/faq/faq';
 import Hero from '@/components/hero/hero';
 import Footer from '@/components/footer/footer';
 import { RatesTable } from '@/components/ratesTable/table';
-import Statistics from '@/components/statistics/statistics';
 import { Currencies } from 'currencies-map';
 import CurrencyConverter from '@/components/converter/converter';
 import Database from '@/services/database/database';
