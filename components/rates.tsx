@@ -27,7 +27,7 @@ const Rates = (props: Props) => {
         </h1>
         <p className={'text-sx max-sm:text-center '}>
           These exchange rates represent the conversion values of various currencies to
-          Zimbabwean Gold (ZiG) as of{' '}
+          Zimbabwe Gold (ZiG) as of{' '}
           <span className="font-bold text-primary">{rateDate}</span>.
         </p>
       </div>
