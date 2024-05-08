@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "get-rates": "node services/rates/script.js"
+    "get-rates": "npm run get-rates --prefix ./services"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
