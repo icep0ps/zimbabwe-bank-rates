@@ -87,7 +87,7 @@ class Database {
         'ask_zwl',
         'mid_zwl'
       )}`.catch((error) => {
-        throw new Error('Failed to create rates', { cause: error });
+        throw new Error('Failed to create rates', { cause: error.message });
       });
     },
   };
