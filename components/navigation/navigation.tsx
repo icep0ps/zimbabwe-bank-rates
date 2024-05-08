@@ -1,19 +1,17 @@
 'use client';
 
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-type Props = {};
-
-const Navigation = (props: Props) => {
+const Navigation = () => {
   const [toggleMenu, setToggleMenu] = useState<boolean>(false);
 
   const handleToggle = () => setToggleMenu((prev) => !prev);
 
   return (
     <nav className="w-full">
-      {toggleMenu && <Humburger />}
+      {toggleMenu && <Humburger handleToggle={handleToggle} />}
 
       <div className="flex justify-between p-5  w-full items-center">
         <Link href={'/#rate'} className="normal-case">
@@ -36,23 +34,29 @@ const Navigation = (props: Props) => {
   );
 };
 
-const Humburger = () => {
+type Props = {
+  handleToggle: () => void;
+};
+
+const Humburger = (props: Props) => {
+  useEffect(() => {
+    window.addEventListener('resize', props.handleToggle);
+    return () => window.removeEventListener('resize', props.handleToggle);
+  }, []);
+
   return (
-    <div className="fixed w-screen h-screen bg-zinc-900 ">
-      <ul className="flex flex-col gap-5  items-center z-10">
-        <li className="text-white">
-          <Link href={'/#exchange_rates'}>Home</Link>
-        </li>
-        <li>
-          <Link href={'/#exchange_rates'} className="text-white">
-            Exchange rates
-          </Link>
+    <div className="fixed w-screen h-screen bg-zinc-900 z-10 left-0 overflow-y-hidden">
+      <X
+        className="absolute right-20 top-10 cursor-pointer"
+        onClick={props.handleToggle}
+      />
+      <ul className="flex flex-col gap-5  items-center h-full justify-center">
+        <li className="hover:border-b-2 border-accent" onClick={props.handleToggle}>
+          <Link href={'/#exchange_rates'}>Exchange rates</Link>
         </li>
 
-        <li>
-          <Link href={'/#faq'} className="text-white">
-            Frequently Asked Questions
-          </Link>
+        <li className="hover:border-b-2 border-accent" onClick={props.handleToggle}>
+          <Link href={'/#faq'}>Frequently Asked Questions</Link>
         </li>
       </ul>
     </div>
