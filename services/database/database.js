@@ -39,7 +39,7 @@ class Database {
       try {
         const sql = await Database.connect();
         let res =
-          await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published desc limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
+          await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date and currency = ${currency} order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published desc limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
 
         if (res.count === 0)
           res =
