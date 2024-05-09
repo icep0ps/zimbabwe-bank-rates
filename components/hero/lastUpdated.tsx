@@ -1,6 +1,5 @@
 import React from 'react';
-import Chart from '../chart/chart';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import RateStatus from './rateStatus';
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
 type Props = {
@@ -10,13 +9,6 @@ type Props = {
 };
 
 const LastUpdated = (props: Props) => {
-  const today = new Date().toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   const rateDate = props.date_published;
 
   const previousRateDate = new Date(props.previous_date_published).toLocaleDateString(
@@ -37,15 +29,7 @@ const LastUpdated = (props: Props) => {
 
       <div className="flex items-center max-sm:justify-center gap-3 flex-wrap">
         <div className="max-sm:flex max-sm:flex-col max-sm:gap-1 max-sm:items-center">
-          <p className="text-xs flex font-bold ">
-            Rate status:{' '}
-            {today === rateDate ? (
-              <span className="text-green-600 pl-2"> Up-to-Date</span>
-            ) : (
-              <span className="text-red-600 pl-2"> Outdated</span>
-            )}
-          </p>
-
+          <RateStatus rateDate={rateDate} />
           <p className="text-xs flex ">
             {props.previous_mid_rate_zwl < 0
               ? `Down by ${props.previous_mid_rate_zwl} ZiG from ${previousRateDate}`
