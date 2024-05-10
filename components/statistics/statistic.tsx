@@ -1,23 +1,22 @@
+import { cn } from '@/lib/utils';
 import React from 'react';
-import { faker } from '@faker-js/faker';
 
 type Props = {
   name: string;
+  value: number;
+  currency?: string;
+  border?: boolean;
 };
 
 const Statistic = (props: Props) => {
   return (
-    <div className=" pl-0 pr-5 border-r">
+    <div className={cn(' pl-0 pr-5 lg:border-r', props.border && 'lg:border-r-0')}>
       <h6 className="text-zinc-300 uppercase">{props.name}</h6>
       <p className="text-2xl ">
-        {faker.number.float({
-          fractionDigits: 2,
-          min: 1000,
-          max: 10000,
-        })}
-        USD
+        {parseFloat(props.value.toString()).toFixed(2)}{' '}
+        {props.currency ? props.currency : 'USD'}
       </p>
-      <p className="text-xs text-zinc-300">+19% from last month</p>
+      <p className="text-xs text-zinc-300"></p>
     </div>
   );
 };

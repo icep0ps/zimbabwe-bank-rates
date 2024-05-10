@@ -19,30 +19,35 @@ class Database {
 
   static get = {
     async rates() {
-      const sql = await Database.connect();
-      const res = await sql`SELECT * FROM rates WHERE date_published =  CURRENT_DATE `;
+      try {
+        const sql = await Database.connect();
+        const res =
+          await sql`select *, mid_zwl - (select mid_zwl from rates where currency = r.currency and date_published < CURRENT_DATE order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where currency = r.currency and date_published < CURRENT_DATE order by date_published desc limit 1) as previous_date_published from rates r where date_published = CURRENT_DATE`;
 
-      if (res.count === 0) {
-        const lastUpatedCurrencies =
-          await sql`SELECT * FROM rates ORDER BY date_published ASC LIMIT 41`;
-        return lastUpatedCurrencies;
+        if (res.count === 0) {
+          const lastUpatedCurrencies =
+            await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_date_published from rates where date_published = (select max(date_published) from rates);`;
+          return lastUpatedCurrencies;
+        }
+        return res;
+      } catch (error) {
+        throw new Error('Error getting rates in database: ' + error.message);
       }
-      return res;
     },
 
     async offical(currency) {
-      const sql = await Database.connect();
-      const res =
-        await sql`SELECT * FROM rates WHERE date_published = CURRENT_DATE AND currency=${currency}`;
+      try {
+        const sql = await Database.connect();
+        let res =
+          await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < current_date and currency = ${currency} order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < current_date order by date_published desc limit 1) as previous_date_published from rates where date_published = current_date and currency = ${currency};`;
 
-      if (res.count === 0) {
-        const res = await sql`SELECT * FROM rates WHERE currency=${currency}`;
-        const lastRate = res.pop();
-        if (lastRate) {
-          return [lastRate];
-        }
+        if (res.count === 0)
+          res =
+            await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_date_published from rates where date_published = (select max(date_published) from rates) and currency = ${currency};`;
+        return res;
+      } catch (error) {
+        throw new Error('Error getting offical rate in database: ' + error.message);
       }
-      return res;
     },
   };
 

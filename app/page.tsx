@@ -1,55 +1,66 @@
 'use server';
 
-import Link from 'next/link';
-import { Toaster } from '@/components/ui/toaster';
-import Waitlist from '@/components/waitlist/waitlist';
-import { GithubIcon, Twitter } from 'lucide-react';
+import Rates from '@/components/rates';
+import Faq from '@/components/faq/faq';
+import Hero from '@/components/hero/hero';
+import Footer from '@/components/footer/footer';
+import { RatesTable } from '@/components/ratesTable/table';
+import { Currencies } from 'currencies-map';
+import CurrencyConverter from '@/components/converter/converter';
+import Database from '@/services/database/database';
+import { currency } from '@/types';
+
+const getOfficalRate = async () => {
+  const rates = await Database.get.offical('USD').catch((error) => {
+    throw new Error(error.message);
+  });
+
+  if (rates[0] === undefined) throw new Error('Could not find offical rate');
+
+  return rates[0] as currency;
+};
+
+const getRates = async () => {
+  const rates = await Database.get.rates().catch((error) => {
+    throw new Error(error.message);
+  });
+
+  return rates
+    .map((rate) => {
+      return {
+        ...rate,
+        name:
+          Currencies.names.get(rate.currency.trim()) === undefined
+            ? rate.currency
+            : Currencies.names.get(rate.currency.trim()),
+      };
+    })
+    .sort((a, b) => {
+      if (a.name && b.name) {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
+          return -1;
+        }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          return 1;
+        }
+      }
+
+      return 0;
+    }) as currency[];
+};
 
 export default async function Home() {
+  const rate = await getOfficalRate();
+  const rates = await getRates();
+
   return (
-    <main className="flex flex-col items-center justify-center gap-5 mt-10 h-fit">
-      <div>
-        <h1 className="text-2xl">Zimbabwe bank rates</h1>
-        <p className="text-xs text-center">Comming soon</p>
-      </div>
-      <p className="text-sm text-center w-3/4">
-        An open source platform to stay updated with real-time Zimbabwean Dollars (ZWL)
-        bank rates and explore seamless currency conversions.
-      </p>
-      <Waitlist />
-
-      <p className="text-sm mt-16">Follow us and stay updated </p>
-
-      <div className="flex items-center gap-5 ">
-        <div>
-          <div className="bg-zinc-800 rounded-full w-16 h-16 flex items-center justify-center mb-2">
-            <GithubIcon scale={'20'} />
-          </div>
-          <Link
-            href={'https://github.com/icep0ps/zimbabwe-bank-rates'}
-            className="text-sm text-center underline"
-            target="_blank"
-          >
-            Github
-          </Link>
-        </div>
-        <div>
-          <div className="bg-zinc-800 rounded-full w-16 h-16 flex items-center justify-center mb-2">
-            <Twitter scale={'20'} />
-          </div>
-          <Link
-            href={'https://twitter.com/icepopsfr'}
-            className="text-sm text-center underline"
-            target="_blank"
-          >
-            Twitter
-          </Link>
-        </div>
-      </div>
-      <p className="text-xs text-zinc-400 ">
-        © 2024 Zimbabwe Bank Rates. All rights reserved.
-      </p>
-      <Toaster  />
-    </main>
+    <section className="flex flex-col w-full relative gap-10 p-5">
+      <Hero rate={rate} />
+      <CurrencyConverter rate={rate} rates={rates} />
+      <Rates data={rates} />
+      <RatesTable data={rates} />
+      <Faq rates={rates} />
+      <Footer />
+    </section>
   );
 }

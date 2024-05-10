@@ -81,6 +81,8 @@
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  margin: 0;
 }
 
 body {
@@ -90,7 +92,6 @@ body {
 }
 
 main {
-  width: 75%;
   margin: auto 0;
 }
 
