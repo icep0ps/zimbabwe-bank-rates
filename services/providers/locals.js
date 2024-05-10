@@ -13,6 +13,14 @@ class Locals {
         throw new Error(`Please set ${key} in environment variables file`);
     }
 
+    console.log({
+      host: process.env.POSTGRES_HOST,
+      user: process.env.POSTGRES_USER,
+      database: process.env.POSTGRES_DATABASE,
+      password: process.env.POSTGRES_PASSWORD,
+      port: process.env.POSTGRES_PORT,
+    });
+
     return {
       host: process.env.POSTGRES_HOST,
       user: process.env.POSTGRES_USER,
