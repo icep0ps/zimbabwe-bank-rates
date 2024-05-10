@@ -6,10 +6,9 @@
     "dev": "next dev --hostname 127.0.0.1",
     "build": "npm --prefix ./services i && next build",
     "start": "next start",
-    "get-rates": "npm get-rates --prefix ./services",
+    "get-rates": "npm run get-rates --prefix ./services",
     "lint": "next lint",
-    "test": "jest",
-    "get-rates": "npm run get-rates --prefix ./services"
+    "test": "jest"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
