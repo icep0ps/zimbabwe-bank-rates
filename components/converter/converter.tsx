@@ -39,8 +39,8 @@ const CurrencyConverter: FC<Props> = (props) => {
           Exchange rate calculator
         </h1>
         <p className="max-lg:text-sm max-sm:text-center">
-          Users are accountable for any misuse of this exchange rate calculator. It's for
-          informational purposes only.
+          Effortlessly convert any supported currency into ZiG (Zimbabwe Gold), providing
+          you with instant access to the value of ZiG against global supported currencies.
         </p>
       </div>
 
