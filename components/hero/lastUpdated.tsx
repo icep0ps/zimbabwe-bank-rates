@@ -1,6 +1,6 @@
 import React from 'react';
 import RateStatus from './rateStatus';
-import { TrendingDown, TrendingUp } from 'lucide-react';
+import { Scale, TrendingDown, TrendingUp } from 'lucide-react';
 
 type Props = {
   date_published: String;
@@ -31,16 +31,27 @@ const LastUpdated = (props: Props) => {
         <div className="max-sm:flex max-sm:flex-col max-sm:gap-1 max-sm:items-center">
           <RateStatus rateDate={rateDate} />
           <p className="text-xs flex ">
-            {props.previous_mid_rate_zwl < 0
-              ? `Down by ${props.previous_mid_rate_zwl} ZiG from ${previousRateDate}`
-              : `Up by ${props.previous_mid_rate_zwl} ZiG from ${previousRateDate}`}
+            {props.previous_mid_rate_zwl < 0 &&
+              `Down by ${props.previous_mid_rate_zwl} ZiG from ${previousRateDate}`}
+
+            {props.previous_mid_rate_zwl > 0 &&
+              `Up by ${props.previous_mid_rate_zwl} ZiG from ${previousRateDate}`}
+
+            {props.previous_mid_rate_zwl == 0 &&
+              `Same as prvious recorded rate from ${previousRateDate}`}
           </p>
         </div>
 
-        {props.previous_mid_rate_zwl < 0 ? (
+        {props.previous_mid_rate_zwl < 0 && (
           <TrendingDown className="bg-red-600 p-1 rounded-xl" />
-        ) : (
+        )}
+
+        {props.previous_mid_rate_zwl > 0 && (
           <TrendingUp className="bg-green-600 p-1 rounded-xl" />
+        )}
+
+        {props.previous_mid_rate_zwl == 0 && (
+          <Scale className="bg-green-600 p-1 rounded-xl" />
         )}
       </div>
     </div>
