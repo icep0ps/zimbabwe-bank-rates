@@ -36,6 +36,7 @@ class Extractor {
     const rates = {};
     let groupedRates = [];
     const currency = new RegExp(/^[A-Z]{3}(%2F[A-Z]+)?$/);
+    const isBidOrAsk = /\b(?:BID|ASK)\b/i;
     const whitespace = new RegExp(/%20/);
     const textNodes = data.Pages[0].Texts.filter((node) => !whitespace.test(node.R.T));
 
@@ -47,7 +48,7 @@ class Extractor {
       })
       .filter((currency) => currency != undefined);
 
-    const currencies = filteredCurrencies.slice(7, filteredCurrencies.length);
+    const currencies = filteredCurrencies.filter((text) => !text.match(isBidOrAsk));
 
     const ungroupedRates = data.Pages[0].Texts.map((node) => {
       return Number(node.R[0].T.replace('%2C', ''));
@@ -76,6 +77,7 @@ class Extractor {
         },
       });
     }
+
     return rates;
   }
 }
