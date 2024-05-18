@@ -1,7 +1,7 @@
 name: Update bank rates
 on:
   schedule:
-    - cron: '30 9 * * *'
+    - cron: '30 8 * * *'
   workflow_dispatch:
 
 env:
