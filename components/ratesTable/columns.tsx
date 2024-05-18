@@ -61,10 +61,10 @@ export const columns: ColumnDef<currency>[] = [
     },
   },
   {
-    accessorKey: 'bid_zwl',
+    accessorKey: 'bid(ZiG)',
     header: () => <div className="text-right">Bid (ZiG)</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('bid_zwl'));
+      const amount = parseFloat(row.getValue('bid(ZiG)'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('de-DE', {
@@ -76,10 +76,10 @@ export const columns: ColumnDef<currency>[] = [
     },
   },
   {
-    accessorKey: 'ask_zwl',
+    accessorKey: 'ask(ZiG)',
     header: () => <div className="text-right">Ask (ZiG)</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('ask_zwl'));
+      const amount = parseFloat(row.getValue('ask(ZiG)'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('de-DE', {
@@ -91,7 +91,7 @@ export const columns: ColumnDef<currency>[] = [
     },
   },
   {
-    accessorKey: 'mid_zwl',
+    accessorKey: 'mid(ZiG)',
     header: ({ column }) => (
       <div
         className="text-right"
@@ -101,7 +101,7 @@ export const columns: ColumnDef<currency>[] = [
       </div>
     ),
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('mid_zwl'));
+      const amount = parseFloat(row.getValue('mid(ZiG)'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('de-DE', {
