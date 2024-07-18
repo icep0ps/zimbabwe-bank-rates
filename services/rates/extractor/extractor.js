@@ -36,7 +36,7 @@ class Extractor {
     const rates = {};
     let groupedRates = [];
     const currency = new RegExp(/^[A-Z]{3}(%2F[A-Z]+)?$/);
-    const isBidOrAsk = /\b(?:BID|ASK)\b/i;
+    const isBidOrAsk = /\b(?:BID|ASK|ZWG)\b/i;
     const whitespace = new RegExp(/%20/);
     const textNodes = data.Pages[0].Texts.filter((node) => !whitespace.test(node.R.T));
 
