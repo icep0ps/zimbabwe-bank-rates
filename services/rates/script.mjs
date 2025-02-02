@@ -1,6 +1,6 @@
 import fs from "fs";
-import Getpdf from "./getpdf.js";
-import Extractor from "./extractor.js";
+import Getpdf from "./getpdf.mjs";
+import Extractor from "./extractor.mjs";
 import path from "path";
 
 Getpdf.run()

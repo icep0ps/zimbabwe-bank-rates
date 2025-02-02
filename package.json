@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "npm --prefix ./services i && next build",
     "start": "next start",
-    "get-rates": "node ./services/rates/script.js",
+    "get-rates": "node ./services/rates/script.mjs",
     "lint": "next lint",
     "test": "jest"
   },
