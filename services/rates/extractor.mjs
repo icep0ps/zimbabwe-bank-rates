@@ -1,5 +1,5 @@
 import PDFParser from "pdf2json";
-import Database from "../database/database.js";
+import Database from "../database/database.mjs";
 import path from "path";
 import { PROJECT_ROOT_DIR } from "../providers/locals.mjs";
 
