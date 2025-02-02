@@ -1,13 +1,16 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import path from "path";
 
-if (process.env.NODE_ENV === 'production')
-  dotenv.config({ path: 'services/.env.production' });
-else dotenv.config({ path: 'services/.env.local' });
+export const PROJECT_ROOT_DIR = path.join(process.cwd());
+
+if (process.env.NODE_ENV === "production")
+  dotenv.config({ path: "services/.env.production" });
+else dotenv.config({ path: "services/.env.local" });
 
 class Locals {
   static config() {
     if (Object.entries(process.env).length == 0)
-      throw new Error('No environment variables found');
+      throw new Error("No environment variables found");
 
     for (const [key, value] of Object.entries(process.env)) {
       if (value === undefined)
