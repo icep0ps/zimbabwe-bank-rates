@@ -1,7 +1,7 @@
 import PDFParser from "pdf2json";
 import Database from "../database/database.js";
 import path from "path";
-import { PROJECT_ROOT_DIR } from "../providers/locals.js";
+import { PROJECT_ROOT_DIR } from "../providers/locals.mjs";
 
 class Extractor {
   static async read() {
