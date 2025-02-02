@@ -36,7 +36,7 @@ class GetPDF {
         currentMonthURL
       );
     } catch (error) {
-      throw Error(`Could not get current month URL: ${error.message}`);
+      throw Error(`Error navigating to exchnage rates page : ${error.message}`);
     }
   }
 
@@ -51,26 +51,32 @@ class GetPDF {
       const lastLink = $("td:has(a[href]):last a").attr("href");
       return "https://www.rbz.co.zw" + lastLink;
     } catch (error) {
-      throw Error(`Could not get current month URL: ${error.message}`);
+      throw Error(
+        `Error navigating to current month PDF page: ${error.message}`,
+      );
     }
   }
 
   static async downloadpdf(url) {
     console.log("downloading pdfs");
     const dirPath = path.join(process.cwd());
-    const file = fs.createWriteStream(
-      path.join(dirPath, "services/rates/rates.pdf"),
-    );
-    return await new Promise((resolve) => {
-      https.get(url, async function (response) {
-        response.pipe(file);
-        file.on("finish", () => {
-          file.close();
-          console.log("Download Completed");
-          resolve();
+    try {
+      const file = fs.createWriteStream(
+        path.join(dirPath, "services/rates/rates.pdf"),
+      );
+      return await new Promise((resolve) => {
+        https.get(url, async function (response) {
+          response.pipe(file);
+          file.on("finish", () => {
+            file.close();
+            console.log("Download Completed");
+            resolve();
+          });
         });
       });
-    });
+    } catch (error) {
+      throw Error(`Error trying to download rates PDF: ${error.message}`);
+    }
   }
 }
 

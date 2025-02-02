@@ -6,26 +6,36 @@ import { PROJECT_ROOT_DIR } from "../providers/locals.js";
 class Extractor {
   static async read() {
     console.log("Extracting from pdf rates");
-    const pdfParser = new PDFParser();
-    pdfParser.loadPDF(path.join(PROJECT_ROOT_DIR, "services/rates/rates.pdf"));
-
-    return await new Promise((resolve) => {
-      pdfParser.on("pdfParser_dataError", (errData) =>
-        console.error(errData.parserError),
+    try {
+      const pdfParser = new PDFParser();
+      pdfParser.loadPDF(
+        path.join(PROJECT_ROOT_DIR, "services/rates/rates.pdf"),
       );
-      pdfParser.on("pdfParser_dataReady", async (pdfData) => {
-        const data = JSON.stringify(pdfData);
-        await Extractor.success(data);
-        resolve();
+
+      return await new Promise((resolve) => {
+        pdfParser.on("pdfParser_dataError", (errData) =>
+          console.error(errData.parserError),
+        );
+        pdfParser.on("pdfParser_dataReady", async (pdfData) => {
+          const data = JSON.stringify(pdfData);
+          await Extractor.success(data);
+          resolve();
+        });
       });
-    });
+    } catch (error) {
+      throw Error(`Error reading PDF: ${error.message}`);
+    }
   }
 
   static async success(pdfData) {
-    console.log("Extracting from pdf rates");
-    const ratesdata = Extractor.genarateRates(JSON.parse(pdfData));
-    console.log("creating rates in database");
-    await Database.create.rates(ratesdata);
+    try {
+      console.log("Extracting from pdf rates");
+      const ratesdata = Extractor.genarateRates(JSON.parse(pdfData));
+      console.log("creating rates in database");
+      await Database.create.rates(ratesdata);
+    } catch (error) {
+      throw Error(`Error extracting data from pdf: ${error.message}`);
+    }
   }
 
   static error(err) {
