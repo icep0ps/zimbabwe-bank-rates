@@ -1,69 +1,83 @@
-import fs from 'fs';
-import 'dotenv/config';
-import https from 'https';
-import puppeteer from 'puppeteer';
+import fs from "fs";
+import "dotenv/config";
+import https from "https";
+import * as cheerio from "cheerio";
+import axios from "axios";
+import path from "path";
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+const agent = new https.Agent({
+  rejectUnauthorized: false,
+});
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-class Getpdf {
+class GetPDF {
   static async run() {
-    console.log('Running in: ' + process.env.NODE_ENV + ' mode');
-    const url = await Getpdf.navigate();
-    return await Getpdf.downloadpdf(url);
+    console.log("Running in: " + process.env.NODE_ENV + " mode");
+    const url = await GetPDF.gotoExchangeRatesPage();
+    const downloadURL = await GetPDF.gotoCurrentMonthExchangeRatesPage(url);
+    return await GetPDF.downloadpdf(downloadURL);
   }
 
-  static async navigate() {
-    const browser = await puppeteer.launch({
-      headless: true,
-      ignoreHTTPSErrors: true,
-      args: ['--disable-features=site-per-process'],
-    });
-    console.log('navigating to rbz');
-    const page = await browser.newPage();
+  static async gotoExchangeRatesPage() {
+    try {
+      const response = await axios.get(
+        "https://www.rbz.co.zw/index.php/research/markets/exchange-rates",
+        { httpsAgent: agent },
+      );
+      const body = response.data;
+      const $ = cheerio.load(body);
 
-    await page.goto('https://www.rbz.co.zw/index.php/research/markets/exchange-rates', {
-      waitUntil: 'domcontentloaded',
-    });
+      const currentMonthURL = $(
+        "div.row0:nth-child(1) > div:nth-child(1) > h2:nth-child(1) > a:nth-child(1)",
+      ).attr("href");
 
-    const hrefElement = await page.waitForSelector('#archive-items > .row0 >>> a');
-
-    const html = await page.evaluate(
-      (element) => element.getAttribute('href').toString(),
-      hrefElement
-    );
-
-    console.log('navigating to rates: https://www.rbz.co.zw' + html);
-    await page.goto('https://www.rbz.co.zw' + html, { waitUntil: 'domcontentloaded' });
-
-    const links = [];
-    console.log('fetching rates');
-    const linksHandlers = await page.$$('.item-page > table > tbody >>>> a');
-
-    for (const linksHandler of linksHandlers) {
-      const attribute = await linksHandler.getProperty('href');
-      const attributeValue = await attribute.jsonValue();
-      links.push(attributeValue);
+      return (
+        "https://www.rbz.co.zw/index.php/research/markets/exchange-rates" +
+        currentMonthURL
+      );
+    } catch (error) {
+      throw Error(`Error navigating to exchnage rates page : ${error.message}`);
     }
+  }
 
-    await browser.close();
+  static async gotoCurrentMonthExchangeRatesPage(url) {
+    console.log("navigating to rates: " + url);
+    try {
+      const response = await axios.get(url, { httpsAgent: agent });
 
-    return links[links.length - 1];
+      const body = response.data;
+      const $ = cheerio.load(body);
+
+      const lastLink = $("td:has(a[href]):last a").attr("href");
+      return "https://www.rbz.co.zw" + lastLink;
+    } catch (error) {
+      throw Error(
+        `Error navigating to current month PDF page: ${error.message}`,
+      );
+    }
   }
 
   static async downloadpdf(url) {
-    console.log('downloading pdfs');
-    const file = fs.createWriteStream('./rates/extractor/rates.pdf');
-    return await new Promise((resolve) => {
-      https.get(url, async function (response) {
-        response.pipe(file);
-        file.on('finish', () => {
-          file.close();
-          console.log('Download Completed');
-          resolve();
+    console.log("downloading pdfs");
+    const dirPath = path.join(process.cwd());
+    try {
+      const file = fs.createWriteStream(
+        path.join(dirPath, "services/rates/rates.pdf"),
+      );
+      return await new Promise((resolve) => {
+        https.get(url, async function (response) {
+          response.pipe(file);
+          file.on("finish", () => {
+            file.close();
+            console.log("Download Completed");
+            resolve();
+          });
         });
       });
-    });
+    } catch (error) {
+      throw Error(`Error trying to download rates PDF: ${error.message}`);
+    }
   }
 }
 
-export default Getpdf;
+export default GetPDF;

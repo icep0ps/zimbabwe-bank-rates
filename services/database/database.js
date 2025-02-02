@@ -1,8 +1,8 @@
-import dotenv from 'dotenv';
-import postgres from 'postgres';
-import Locals from '../providers/locals.js';
+import dotenv from "dotenv";
+import postgres from "postgres";
+import Locals from "../providers/locals.js";
 
-dotenv.config({ path: 'services/.env' });
+dotenv.config({ path: "services/.env" });
 
 class Database {
   static async connect() {
@@ -31,7 +31,7 @@ class Database {
         }
         return res;
       } catch (error) {
-        throw new Error('Error getting rates in database: ' + error.message);
+        throw new Error("Error getting rates in database " + error.message);
       }
     },
 
@@ -46,48 +46,36 @@ class Database {
             await sql`select *, mid_zwl - (select mid_zwl from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_mid_rate_zwl, (select date_published from rates where date_published < (select max(date_published) from rates) order by date_published desc limit 1) as previous_date_published from rates where date_published = (select max(date_published) from rates) and currency = ${currency};`;
         return res;
       } catch (error) {
-        throw new Error('Error getting offical rate in database: ' + error.message);
+        throw new Error(
+          "Error getting offical rate in database " + error.message,
+        );
       }
     },
   };
 
   static create = {
-    async waitlist(email) {
-      try {
-        const sql = await Database.connect();
-        const user = await sql`SELECT * FROM waitlist where email=${email}`;
-
-        if (user.count !== 0) {
-          return user[0];
-        } else {
-          await sql`INSERT INTO waitlist (email) VALUES(${email})`;
-          return null;
-        }
-      } catch (error) {
-        throw new Error('Error adding user to waitlist: ' + error);
-      }
-    },
-
     async rates(rates) {
       const ratesArray = [];
-      const sql = await Database.connect();
+      const sql = await Database.connect().catch((error) => {
+        throw new Error(`Failed to connect to database ${error.message}`);
+      });
 
       for (const [currency, rate_values] of Object.entries(rates)) {
-        const currencyName = currency.trim().replace('%2F', '/');
+        const currencyName = currency.trim().replace("%2F", "/");
         ratesArray.push({ currency: currencyName, ...rate_values });
       }
 
       return await sql`INSERT INTO rates ${sql(
         ratesArray,
-        'currency',
-        'bid',
-        'ask',
-        'mid_rate',
-        'bid_zwl',
-        'ask_zwl',
-        'mid_zwl'
+        "currency",
+        "bid",
+        "ask",
+        "mid_rate",
+        "bid_zwl",
+        "ask_zwl",
+        "mid_zwl",
       )}`.catch((error) => {
-        throw new Error('Failed to create rates', { cause: error });
+        throw new Error(`Failed to create rates in database ${error.message}`);
       });
     },
   };
